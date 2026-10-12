@@ -35,3 +35,8 @@ GitHub remains public; reviewed source/assets/docs only, no local history, priva
 Performance/native workflow measurements use graphics source18d1692. The subsequent inspection-panel wording explicitly identifies the old render; no scene, camera, inference or procedure change followed the measurement. Final native warning screenshot checked separately.
 
 Screenshots: presentation/screenshots/{before,after,lager,ipa,stout,filler,capper,inspection,desktop-1920}.jpg are reduced copies of actual native PNGs retained under reports/stage1. The before/after pair uses the common measurement camera.
+
+
+### Stage 1 operator visual acceptance — 2026-10-12T23:42:58.331405+00:00
+
+Pietro reported: “yes, works really well.” Recorded as positive operator visual acceptance of the Stage 1 brewery presentation, superseding the earlier pending status. This is user-reported acceptance, not additional technical verification or approval of inspection accuracy, production reliability, hardware sizing or external/mobile streaming. Published measurements and known limitations are unchanged. No further milestone work started; the existing demo remains available.
