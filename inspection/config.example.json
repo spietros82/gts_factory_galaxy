@@ -1,0 +1,9 @@
+{
+  "host": "127.0.0.1", "port": 8810,
+  "backend": "learned-rf", "model_path": "inspection/models/cap-rf.joblib",
+  "policy_path": "inspection/models/policy.json",
+  "data_path": "runtime/inspection", "queue_capacity": 2,
+  "maximum_capture_age_seconds": 2.0,
+  "ollama_endpoint": "http://127.0.0.1:11434", "assistant_model": "qwen3:8b",
+  "explanation_budget": 6, "timeout_seconds": 120
+}

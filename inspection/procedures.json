@@ -1,0 +1,4 @@
+[
+ {"id":"IP-SCOPE-1","version":"1.0","review_status":"Approved for demonstration scope only; not an industrial operating procedure","text":"Assess only visual cap presence and placement on one associated neck crop. Pixels cannot establish mechanical attachment, torque, seal integrity or leak-tightness. Synthetic training does not validate physical inspection."},
+ {"id":"IP-CHECK-1","version":"1.0","review_status":"Demo wording approved by implementation scope; no engineer approval","text":"Review the recorded target crop, identity, capture timestamp and quality. Reacquire a fresh well-lit single-target image if association, visibility or age is insufficient. Treat all cap assessments as experimental until independent physical validation. Follow site-approved procedures for any physical inspection; this application performs no machine action."}
+]

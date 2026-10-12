@@ -1,0 +1,11 @@
+{
+  "min_mean": 0.06,
+  "min_contrast": 0.025,
+  "min_detail": 0.004,
+  "max_age_seconds": 2,
+  "model_sha256": "f7561e9de63111389cfff277fbf924b37e25f73f3e7ed121b5f6c9422fe5812b",
+  "threshold": 0,
+  "baseline_offset": 0.04,
+  "baseline_spread": 0.14,
+  "baseline_pixels": 50
+}
