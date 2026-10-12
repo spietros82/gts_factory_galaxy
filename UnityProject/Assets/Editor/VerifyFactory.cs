@@ -22,6 +22,6 @@ public static class VerifyFactory {
   var json=JsonUtility.ToJson(new ObservationBatch{session="test",sim_time=missing.Time,profile=2,observations=missing.Observations.ToArray()});
   Check(!json.Contains("scenario")&&!json.Contains("fault")&&!json.Contains("cap_displaced")&&!json.Contains("driftStarted"),"Observed payload excludes injected state");
   var reset=Run(null,4000);Check(reset.Packed==a.Packed,"Reset reconstructed replay matches seed");
-  File.WriteAllText("../reports/unity-core-checks.json","{\"passed\":"+passed+",\"method\":\"Unity Editor executes actual C# simulation; not standalone visual QA\",\"unity\":\""+Application.unityVersion+"\"}");
+  File.WriteAllText(FactoryApp.Argument("--check-output","../reports/unity-core-checks.json"),"{\"passed\":"+passed+",\"method\":\"Unity Editor executes actual C# simulation; not standalone visual QA\",\"unity\":\""+Application.unityVersion+"\"}");
  }
 }

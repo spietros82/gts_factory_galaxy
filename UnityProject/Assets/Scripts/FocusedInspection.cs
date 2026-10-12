@@ -31,7 +31,8 @@ namespace Braemac.Factory {
   void Start(){
    app=GetComponent<FactoryApp>();endpoint=FactoryApp.Argument("--inspection-endpoint","http://127.0.0.1:8810");
    var uri=new Uri(endpoint);if(uri.Host!="127.0.0.1"&&uri.Host!="localhost")throw new Exception("Inspection must remain local");
-   camera=new GameObject("Fixed synthetic inspection view").AddComponent<Camera>();camera.enabled=false;camera.fieldOfView=38;camera.nearClipPlane=.02f;camera.farClipPlane=40;
+   camera=new GameObject("Fixed synthetic inspection view").AddComponent<Camera>();camera.enabled=false;
+   if(app.PresentationEnabled)camera.cullingMask=1<<BreweryPresentation.LegacyLayer;camera.fieldOfView=38;camera.nearClipPlane=.02f;camera.farClipPlane=40;
    camera.transform.position=new Vector3(3,2.25f,-.58f);camera.transform.LookAt(new Vector3(3,1.74f,0));
    feed=new RenderTexture(512,384,24);camera.targetTexture=feed;camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.025f,.045f,.07f);
    pixels=new Texture2D(512,384,TextureFormat.RGB24,false);dataset=FactoryApp.Argument("--inspection-dataset");

@@ -10,6 +10,8 @@ namespace Braemac.Factory {
   readonly Material steel,navy,cyan,rubber,yellow,glass,liquid,white,cardboard;
   readonly List<TextMesh> labels=new List<TextMesh>();
   readonly GameObject root;
+  public GameObject Root {get{return root;}}
+  public void SetRenderLayer(int layer){foreach(var t in root.GetComponentsInChildren<Transform>(true))t.gameObject.layer=layer;}
   public FactoryGeometry(){
    root=new GameObject("Braemac bottling line — procedural assets");
    steel=Mat("Brushed stainless",new Color(.5f,.58f,.66f),.82f,.72f);
@@ -23,11 +25,12 @@ namespace Braemac.Factory {
    cardboard=Mat("Carton",new Color(.57f,.35f,.14f),0,.1f);
    Build();
   }
+  static void Dispose(UnityEngine.Object value){if(Application.isPlaying)UnityEngine.Object.Destroy(value);else UnityEngine.Object.DestroyImmediate(value);}
   static Material Mat(string name,Color c,float metallic,float smooth){var m=new Material(Shader.Find("Standard"));m.name=name;m.color=c;m.SetFloat("_Metallic",metallic);m.SetFloat("_Glossiness",smooth);return m;}
   GameObject Shape(string name,PrimitiveType type,Vector3 p,Vector3 scale,Material mat,Transform parent=null){
-   var o=GameObject.CreatePrimitive(type);o.name=name;o.transform.SetParent(parent==null?root.transform:parent,false);
+   var o=GameObject.CreatePrimitive(type);o.name=name;o.layer=parent==null?root.layer:parent.gameObject.layer;o.transform.SetParent(parent==null?root.transform:parent,false);
    o.transform.localPosition=p;o.transform.localScale=scale;o.GetComponent<Renderer>().sharedMaterial=mat;
-   UnityEngine.Object.Destroy(o.GetComponent<Collider>());return o;
+   Dispose(o.GetComponent<Collider>());return o;
   }
   GameObject Box(string name,Vector3 p,Vector3 size,Material m,Transform parent=null){return Shape(name,PrimitiveType.Cube,p,size,m,parent);}
   void Rod(string name,Vector3 from,Vector3 to,float radius,Material m,Transform parent=null){var o=Shape(name,PrimitiveType.Cylinder,(from+to)/2,new Vector3(radius,(to-from).magnitude/2,radius),m,parent);o.transform.up=(to-from).normalized;}
@@ -98,7 +101,7 @@ namespace Braemac.Factory {
   Mesh bottleMesh;
   BottleVisual CreateBottle(int id){
    if(bottleMesh==null)bottleMesh=BottleMesh();
-   var o=new GameObject("Bottle "+id);o.transform.SetParent(root.transform);
+   var o=new GameObject("Bottle "+id);o.layer=root.layer;o.transform.SetParent(root.transform);
    o.AddComponent<MeshFilter>().sharedMesh=bottleMesh;o.AddComponent<MeshRenderer>().sharedMaterial=glass;
    Shape("Printed sleeve",PrimitiveType.Cylinder,new Vector3(0,.28f,0),new Vector3(.344f,.095f,.344f),white,o.transform);
    var fluid=Shape("Fill-level marker",PrimitiveType.Cylinder,new Vector3(0,.51f,0),new Vector3(.315f,.018f,.315f),liquid,o.transform);
@@ -113,7 +116,7 @@ namespace Braemac.Factory {
     v.Cap.transform.localPosition=new Vector3(b.CapDisplaced?.075f:0,.76f,0);v.Cap.transform.localRotation=Quaternion.Euler(0,0,b.CapDisplaced?18:0);
     v.Fluid.SetActive(b.Stage>=2);v.Fluid.transform.localPosition=new Vector3(0,.51f*(b.Fill/500f),0);
    }
-   foreach(var id in new List<int>(Products.Keys))if(!alive.Contains(id)){UnityEngine.Object.Destroy(Products[id].Root);Products.Remove(id);}
+   foreach(var id in new List<int>(Products.Keys))if(!alive.Contains(id)){Dispose(Products[id].Root);Products.Remove(id);}
    for(int h=0;h<4;h++){float stroke=0;foreach(var b in sim.Bottles)if(b.Stage==1&&b.Head==h)stroke=Mathf.Sin(Mathf.PI*b.Dwell/.7f);Moving["head"+h].localPosition=new Vector3(-8.1f+h*.7f,1.95f-stroke*.12f,0);}
    Moving["capper"].localRotation=Quaternion.Euler(0,sim.CapperRotation,0);
    Moving["packer"].localPosition=new Vector3(10,1.75f,Mathf.Sin(Mathf.PI*Mathf.Clamp01((float)(sim.Time-sim.LastPackedTime)/.45f))*.4f);
