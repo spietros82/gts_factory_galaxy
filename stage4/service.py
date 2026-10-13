@@ -45,7 +45,7 @@ class Engine:
     if active.get(line)!=self.jobs[line][0]['session_id']:
      self.jobs.pop(line);self.counts['cancelled']+=3;self.busy.discard(line)
    for line,session in active.items():
-    if self.lines.get(line,{}).get('session_id')!=session:self.lines[line]={'line_id':line,'session_id':session,'accepted':0,'completed':0,'dropped':0,'last_completed':0.,'latency_ms':0.}
+    if self.lines.get(line,{}).get('session_id')!=session:self.lines[line]={'line_id':line,'session_id':session,'accepted':0,'completed':0,'dropped':0,'last_completed':0.,'latency_ms':0.,'registered_monotonic':time.monotonic()}
    self.append('registry.jsonl',{'utc':utc(),'lines':values});self.condition.notify_all()
   return {'registered':len(active)}
  def submit(self,value):
@@ -149,7 +149,25 @@ class Engine:
   with self.lock:
    elapsed=max(.001,time.monotonic()-self.started);current=[r for r in self.records if self.active.get(r['line_id'])==r['session_id']];matching=[r for r in current if r['line_id']==line];batch=matching[-1]['batch_id'] if matching else '';results=copy.deepcopy([r for r in matching if r['batch_id']==batch]);events=copy.deepcopy([r for r in self.reviews if r['line_id']==line][-36:])
    for r in results+events:r['age_seconds']=max(0,time.time()-datetime.fromisoformat(r['capture_utc']).timestamp());r['historical']=self.active.get(r['line_id'])!=r['session_id'] or r['age_seconds']>3 or self.native.get('paused',False)
-   perline=[dict(v,inspection_rate=v['completed']/elapsed) for k,v in self.lines.items() if k in self.active];lat=percentiles(list(self.latencies));trigger=percentiles(list(self.trigger_latencies));oldest=max([0]+[time.time()-v[3] for v in self.jobs.values()]+[max(0,time.time()-stamp) for stamp in self.running_since.values()])
+   latest={}
+   for r in current:
+    previous=latest.get(r['line_id'],[])
+    if previous and previous[-1]['batch_id']!=r['batch_id']:previous=[]
+    previous.append(r);latest[r['line_id']]=previous
+   perline=[]
+   for k,v in self.lines.items():
+    if k not in self.active:continue
+    rows=latest.get(k,[]);health='Current'
+    if not self.native.get('inspection',True):health='Off'
+    elif self.actual=='unavailable':health='Unavailable'
+    elif self.native.get('paused',False):health='Historical'
+    elif len(rows)!=3:health='Waiting'
+    elif time.time()-datetime.fromisoformat(rows[0]['capture_utc']).timestamp()>3:health='Stale'
+    elif any(r['decision']=='uncertain' for r in rows):health='Uncertain'
+    elif any(r['decision']not in ['aligned','within_range']for r in rows):health='Review'
+    interval=max(.001,time.monotonic()-v['registered_monotonic'])
+    perline.append(dict({name:value for name,value in v.items() if name!='registered_monotonic'},inspection_rate=v['completed']/interval,rate_elapsed_seconds=interval,inspection_health=health))
+   lat=percentiles(list(self.latencies));trigger=percentiles(list(self.trigger_latencies));oldest=max([0]+[time.time()-v[3] for v in self.jobs.values()]+[max(0,time.time()-stamp) for stamp in self.running_since.values()])
    return {'contract':'gts.multi-state/1','ready':self.ready,'selected_device':self.selected,'actual_device':self.actual,'gpu_status':self.gpu_status,'status':('unavailable' if self.actual=='unavailable' else 'processing' if self.running else 'idle / ready'),'active_lines':len(self.active),'active_views':len(self.active)*3 if self.native.get('inspection',True) else 0,'queue_depth':len(self.jobs),'oldest_request_age_seconds':oldest,'worst_line_latency_ms':max([0]+[v['latency_ms'] for v in perline]),'end_to_end_p50_ms':lat['p50'],'end_to_end_p95_ms':lat['p95'],'end_to_end_p99_ms':lat['p99'],'trigger_to_result_p50_ms':trigger['p50'],'trigger_to_result_p95_ms':trigger['p95'],'trigger_to_result_p99_ms':trigger['p99'],'trigger_timing_samples':len(self.trigger_latencies),'elapsed_seconds':elapsed,'offered_rate':self.counts['offered']/elapsed,'accepted_rate':self.counts['accepted']/elapsed,'inspection_rate':self.counts['completed']/elapsed,'bottle_batches_rate':self.counts['completed']/3/elapsed,'lines':perline,'counts':dict(self.counts),'results':results,'events':list(reversed(events)),'native':self.native,'stop_reason':self.stop_reason,'assistant_state':self.assistant_state,'assistant_text':self.assistant_text,'assistant_event_id':self.assistant_event_id,'explanation_calls':self.calls,**dict(self.counts),**self.metrics}
  def explain(self,frame_id):
   with self.lock:

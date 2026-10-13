@@ -1,14 +1,15 @@
 {
-  "runtime_source_commit": "010b83d49b3accb42137f917a53eb91e2768a2c2",
-  "measured_commit": "9ea0b8132c9266778630a93d65a246bd652f3455",
-  "public_source_commit": "c06222f0a3500b1985033e0494a4bc074e0d8cd0",
+  "runtime_source_commit": "dbc0595a0e514df1e81ee7984b3ae942100ee85f",
+  "measurement_commit": "9ea0b8132c9266778630a93d65a246bd652f3455",
+  "initial_public_projection": "c06222f0a3500b1985033e0494a4bc074e0d8cd0",
+  "public_ancestry_base": "d58cd6315c4f206e73247368b8693259abf832e4",
   "file_sha256": {
     "UnityProject/Assets/Editor/VerifyMultiLine.cs": "3ea5e91d31d43bd5b59e9e99f7ace974a60290788c7b672f049aad02822aa20a",
     "UnityProject/Assets/Scripts/FactoryApp.cs": "1c7ce3f5b22dcd1720a4f086cc7e0dfe40d6ebb7a0c40a61dc68724f7c08ac68",
     "UnityProject/Assets/Scripts/FactoryGeometry.cs": "0ed5813b8d31a25b211706de48e427ac244a2226c29a071e69e57e60110f9835",
     "UnityProject/Assets/Scripts/MultiLineCapture.cs": "80184d9af03845ecaae296890bf19c01be103876d0294d40c18b0a42bdc458ca",
     "UnityProject/Assets/Scripts/MultiLineClock.cs": "de4c9401562f8c090c53f44b08631a04fd7167a8b112da70e4df86e9acd0406f",
-    "UnityProject/Assets/Scripts/MultiLineFactory.cs": "9d86b4304530dfc871a05b39496c6c468ecb5ed8fda3140892332bad426b7c4a",
+    "UnityProject/Assets/Scripts/MultiLineFactory.cs": "3c99a3cc4738788cbf0a1c5f79203fd1b1a77a95aae7f3c35714d7604ad9edc7",
     "UnityProject/Assets/Scripts/MultiLineFixtures.cs": "77c9cbf66fc1e92ba6cd3243885e9572adacffcfeff937ca83689005b55c1da3",
     "UnityProject/Assets/Scripts/PlcTelemetry.cs": "fe2c8049b01fdff1653e72a2294f818f3dfab70d631f79ac477c3e283bfadf30",
     "stage4/__init__.py": "d4d360d86290f6697f8ad5490e1af593c01f532f1c9db321ac7e18a8a389d9e0",
@@ -21,15 +22,15 @@
     "stage4/monitoring.py": "1eada9148b53b9c1cb7a4681ac68e3a6809ea4c5fed57ca901af063bdd918cfb",
     "stage4/native_qa.py": "5e7ea7b2c48fcdd70339ac23690566f824044b62913db3dc83dd9255f9400ff7",
     "stage4/replay.py": "83bf489dd43e22fcd37a9798690b4ae2820dc12ed189046c958bda5f621684db",
-    "stage4/service.py": "139e46ea08fbfcc7e15f96e7d9c74ebbdfcb6bfa3f397d6eed0ce6276006a68f",
+    "stage4/service.py": "c2380a4dcb157cfef19218bd9cfde01520e869d3f26499d3c101852f10d9cd49",
     "stage4/start.sh": "5d167a008bb369677fc677ba635cdc487d89dfdc4936a00e625f7a1967faf5cb",
     "stage4/stop.sh": "d2c405a830f6d5c0b3fc28043696d5ac79cfb8fd14a6f8ba4e1e8d4921a05e1f",
     "stage4/summarise.py": "25d040e22fc24f0a178ff79cb6624038778ed7d2791605b0f22c3372cad9bb8c",
     "stage4/supervisor.py": "a903dd250494b705ec5ae60d7ba15a867ee244fea51c05287e0987ec096dd084",
     "stage4/test_safety.py": "ab8ef0a14ef28d70b69043e8a9901d86e49aab04bfac4a8987567cce28997f16",
-    "stage4/test_stage4.py": "1f520cdd09ccae0d52e243038b2b05f80df979a92ebeb0ad87f0fb7d2e5b943b",
+    "stage4/test_stage4.py": "dc788ac3243cadd643df50e3c4e6c75a61a2b0b567e222a09322b9acf5015364",
     "stage4/timing.py": "2db06584fe2ed684c8a8565ba07e398daa03cfadff30f7fcff077c1c009d5359"
   },
-  "models_unchanged": true,
-  "performance_cycle_repeated": false
+  "model_weights_preprocessing_thresholds_unchanged": true,
+  "capacity_cycle_repeated": false
 }

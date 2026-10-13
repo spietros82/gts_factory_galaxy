@@ -1,6 +1,6 @@
 # Braemac GTS Factory Galaxy — Stage4 consolidated handover
 
-This is a compact upload-ready record. Source-only PR: https://github.com/spietros82/gts_factory_galaxy/pull/4 . Measured commit9ea0b81; final runtime010b83d; public sourcec06222f. No private logs, tokens, images or weights embedded. Acceptance pending Pietro; stopStage4.
+Compact upload-ready record. PR: https://github.com/spietros82/gts_factory_galaxy/pull/4 . Measured source9ea0b81; final runtime dbc0595. Reviewed public source ancestry is separate from full local history; final public head/archive in local reports/stage4/delivery.json. No secrets, images, weights or raw logs embedded. Acceptance pending Pietro; stop atStage4.
 
 
 ---
@@ -13,7 +13,7 @@ The software allocation guard is 48; safe default is one line/CPU. The single bo
 
 Faster live acquisition failed at its first rate with explicit missing-target drops; higher live rates are unproven. Saved-crop replay reached the tested ceiling of 1,200 images/s on both devices, excluding camera/rendering/transport/storage. CPU was sufficient for this model; no GPU advantage claimed.
 
-Verification: 58 offline tests, original Unity checks plus 12 multi-line checks, 29 native functional and 7 native closure assertions passed. New 81-crop integration fixtures agreed with expected synthetic outcomes and between CPU/GPU. No retraining, old locked-test evaluation or new accuracy claim. Cross-origin images have small pixel differences; real-camera validation remains necessary.
+Verification: 60 offline tests, original Unity checks plus 12 multi-line checks, 29 native functional and 7 native closure assertions passed. New 81-crop integration fixtures agreed with expected synthetic outcomes and between CPU/GPU. No retraining, old locked-test evaluation or new accuracy claim. Cross-origin images have small pixel differences; real-camera validation remains necessary.
 
 Preserved previous source/builds/results/models/ledgers. Measurement source is `9ea0b8132c9266778630a93d65a246bd652f3455`; final source/PR IDs are in DELIVERY.md. Original timing-unit error and other failures remain recorded; explicit corrected timing reports do not replace raw evidence. Later safety/metric closure was functionally verified without another capacity cycle.
 
@@ -47,7 +47,7 @@ No model, threshold or preprocessing change; no training, old locked-test reuse,
 
 ## Verification and remaining limits
 
-58 distinct offline tests passed. Original Unity simulation/presentation/telemetry checks (11/8/15) and 12 new multi-line checks passed. Native functional 29/29 and closure 7/7 passed, including service outage/restart while the simulator continued. New 81-crop integration fixtures agreed with their synthetic expected outcomes and between CPU/GPU; maximum score difference 2.3841858e-7. This is integration consistency, not industrial accuracy. Canonical images at different origins differed by at most one pixel-component byte; no byte-identity claim.
+60 distinct offline tests passed. Original Unity simulation/presentation/telemetry checks (11/8/15) and 12 new multi-line checks passed. Native functional 29/29 and closure 7/7 passed, including service outage/restart while the simulator continued. New 81-crop integration fixtures agreed with their synthetic expected outcomes and between CPU/GPU; maximum score difference 2.3841858e-7. This is integration consistency, not industrial accuracy. Canonical images at different origins differed by at most one pixel-component byte; no byte-identity claim.
 
 Old models, frozen datasets, reports and ledgers remain intact; Qwen ledger still 3/6. Raw evidence is under `reports/stage4/`; public summaries, screenshots and charts under `stage4/`. Performance applies to measured source `9ea0b8132c9266778630a93d65a246bd652f3455`. The original measured Stage 4 binary was replaced by closure builds; source and per-phase metadata survive, but no archived byte-identical candidate binary is claimed. Previous stage builds are preserved.
 
@@ -155,14 +155,14 @@ Measured candidate9ea0b8132c9266778630a93d65a246bd652f3455, baselinead1f773. No 
 -Native functional29assertions PASS: actual1920×1080,1/3/24instances,counters/sessions/cyclicproducts,offscreencompletions,Line02-onlyunderfill/blockage/accumulation/clear,productchanges,pauseallclocks/historicalresults,reset/removal/readdsessionisolation,threepresentationmodes,Debug/review,selected/actualGPUbatch,Stop→1lineCPU,unchangedQwenledger. reports/stage4/native-qa/checks.json andactualPNGcaptures. Initial24linecheck failedstarvation; retainednative-qa-first. Acquisitionqueuefix checkedbeforeperformancefreeze. Earlyresolutionchecks retained; finalwaitsforactualfullscreenclient.
 -New authored27batches/81crops:3products×8knownvisibleconditions plus3canonicalLagercapturesatdifferentlineorigins. Expectations/splits neutralcaptureIDs frozenbefore capture underreports/stage4/integration;nooldlockedimages. FrozenCPU/GPUdecisionagreement81/81,expectedfixtureoutcomes81/81,scoremaxdifference2.3841858e-7≤1e-4. Integrationcheck, not populationaccuracy. Exactrecords/images/conflictingfailures retained. Representativecontactsheet manuallyinspected; no training/tuning.
 -Cross-linecaptureisolation: onlyselectedtargetlayer10,farclip4,gridspacing12;three canonicalorigins maxpixelcomponentdifference1byte andmaxmean.002735byte acrossallRGBcomponents. Bytehashesnotidentical; this is explicit, no renewedinspectionaccuracyclaim. Originalframe/crop/IDs retained. Otherlinegeometry/lights do not enter controlledcapturelayer. Simulator-assistedassociation/temporarystationpose not realtracking proof.
--ShutdownNullReference fromdestroyedcamera fixedwithnullguard;failedlog retained. Syntaxbuildfailure retained; currentreleasebuildsucceeds withoutnewdependencies.
+-ShutdownNullReference from destroyed camera fixed with null guard. The original detailed shutdown trace was overwritten by subsequent capture and is unavailable; its occurrence/fix remains documented. Earlier project results were not affected. Syntaxbuildfailure retained; currentreleasebuildsucceeds withoutnewdependencies.
 
 Saved capacities/confirmation/rates/replay belong to PERFORMANCE.md andcharts, not abovequalitychecks. GPUmodelbackendhardwareGLverified withactualcompletedbatches/shaderqueries; residentmodelisnotactiveinference. Qwenledger remains3/6; older focusedservice/ledgers untouched. No realPLC/camera,productionsecurityorindustrialcapacityapproval.
 
 
 ## Final closure and acceptance record
 
-- **58 distinct offline tests PASS**, final suite:19 Stage4engine +7safety/timing/supervisor +14unchangedStage3 +18original checks. `reports/stage4/final-offline.txt`. Earlier module-path invocations are preserved, not counted as extra successful tests. New queued cross-line frame-ID reuse test first failed; raw `frame-reservation-first-failed.txt` retained, then admission reservation fixed. Dedup caches bounded8192batches/24576frames.
+- **60 distinct offline tests PASS**, final suite:21 Stage4engine +7safety/timing/supervisor +14unchangedStage3 +18original checks. `reports/stage4/final-offline-health.txt`. Earlier module-path invocations are preserved, not counted as extra successful tests. New queued cross-line frame-ID reuse test first failed; raw `frame-reservation-first-failed.txt` retained, then admission reservation fixed. Dedup caches bounded8192batches/24576frames.
 - Final Unity release builds and final Editor checks PASS; original11simulation/8presentation/15telemetry plus12multiline assertions. Final log `reports/stage4/raw/final-editor-checks.log`, summary `final-editor-checks.json`. Compiler/build logs retained. The original frozen measured Stage4executable was replaced by the closure build; its source commit and exact per-phase commands/native metadata remain. No byte-identical archived candidate binary is claimed. Earlier Stage1/2/3builds preserved separately.
 - Final native29/29 functional assertions PASS again (`reports/stage4/final-native-qa/checks.json`); rerun replaces the accepted functional result rather than inflating counts. Additional **7/7 closure assertions** PASS (`closure-native-qa/checks.json`): joined trigger timing, full monitor timing, service outage with continuing simulator, restart registry/current-session recovery and new CPU inspection. Actual outage screenshot shows N/A resources; no hardware fault reproduction. GPU/new batch verified in native workflow. Screens are actual native captures, not mockups.
 - Stop/recovery: native control returns1lineCPU; offline guard result aborts the whole future harness cycle; independent supervisor deadline test terminated only an owned synthetic sleeping child while an unrelated test child remained alive. No unsafe resource limit was induced on this host. No actual temperature/memory guard fired during capacity. Supervisor terminating an unresponsive Unity cannot keep that same process running; wrapper launches a stable replacement. Completed cycle protected from rerun.
@@ -172,7 +172,11 @@ Saved capacities/confirmation/rates/replay belong to PERFORMANCE.md andcharts, n
 
 Stage4 functional implementation and bounded verification complete; presenter benchmark cadence failure remains a known limitation. Pietro's Stage4 acceptance pending. Earlier stage acceptance is preserved. No Stage5 begun.
 
-Final runtime source commit: `010b83d`; release build succeeded. Full Debug shows trigger latency/oldest acquisition and measured monitoring cost. Completed-cycle wrapper refuses another run before touching running services. All 4,628 protected hashes unchanged (`final-preservation.json`). Final caption probe initially hit a missing startup field; corrected wait uses optional fields, and the actual screenshot was captured. This was QA plumbing, not a simulation failure.
+Earlier closure source commit: `010b83d`; release build succeeded. Full Debug shows trigger latency/oldest acquisition and measured monitoring cost. Completed-cycle wrapper refuses another run before touching running services. All 4,628 protected hashes unchanged (`final-preservation.json`). Final caption probe initially hit a missing startup field; corrected wait uses optional fields, and the actual screenshot was captured. This was QA plumbing, not a simulation failure.
+
+Final metric closure adds two meaningful fake tests (per-line registration denominator and health aggregation), bringing the final distinct suite to60. Native screenshots verify per-line rates/health, visible averaging periods and backend activity state; health-native-qa. These display/counter changes and retired-review clearing are not model/camera/scheduling changes. No additional performance cycle or quality evaluation was run.
+
+Final runtime `dbc0595`:60-test suite PASS, compiled release PASS, final-list-native-qa actual1080p1/3/24screens reviewed. Per-line inspection state and averaging periods visible without horizontal overflow. Old source/build/measurement records remain.
 
 
 ---
@@ -186,3 +190,27 @@ Final runtime source commit: `010b83d`; release build succeeded. Full Debug show
 5. Switch CPU/GPU, show selected versus actual execution device and completed new batch. Debug shows actual captured/completed rate, queue/deadlines, frame times and host resource counters. Increase lines only within documented tested range. Normal cadence and Benchmark cadence are different workloads. Use Stop benchmark to return to one-lineCPU. Explain CPU/GPUresults honestly: same weights, no fabricated advantage, no physical-camera capacity claim.
 
 Capacity report/charts separate full factory, rendering-only and saved-crop replay. This machine's synthetic demonstration does not establish a need for an A395 over a cheaper computer. Operator acceptance remains pending until Pietro reviews Stage4.
+
+
+---
+
+# Stage 4 delivery record
+
+- Local branch: `stage4-independent-lines-capacity`.
+- Measured source: `9ea0b8132c9266778630a93d65a246bd652f3455`.
+- Final runtime source: `dbc0595`; source/configuration hashes in SOURCE-FREEZE.json.
+- Public source projection: `c06222f0a3500b1985033e0494a4bc074e0d8cd0`, parent reviewed Stage3 `08afde87cac67cae6edd4bfc5027c15cbef77f89`. A subsequent documentation-only commit records this delivery.
+- [Stage 4 PR #4](https://github.com/spietros82/gts_factory_galaxy/pull/4), open/clean, stacked on unmerged Stage3 PR #3. Not merged; public repository visibility unchanged. No private/full local ancestry pushed.
+- Preserved local Stage3 source `ad1f773`, tag `stage3-before-stage4-20261013`, compiled `builds/stage3-stage4-baseline`; earlier launchers/results/models remain.
+
+Native review launch `./stage4/start.sh`, stop `./stage4/stop.sh`; default resizable1600×900/1lineCPU/normal acquisition. Own user units `braemac-factory-stage4-player/service`, loopback API8830. Final matching current results were cap aligned, fill within range, label aligned; no physical equipment. QA/benchmark child processes stopped; only the fresh review prototype was left running. Logs via user journal and runtime/stage4-native/player.log.
+
+One 30.60-minute cycle:24 highest confirmed presentation pass;48 first tested failure. Faster acquisition failed at its first demand; higher rates untested. Replay ceiling1,200 images/s excludes acquisition/render/transport/storage. No GPU advantage or industrial capacity claim. Final closure functionally verified; capacity not repeated.
+
+60 distinct offline tests, original Unity checks plus12new,29native functional and7closure assertions passed. 81new synthetic integration crops reviewed once, not old locked-test reuse. All4,628protected file hashes unchanged, existingQwenledger3/6unchanged and zeroStage4calls. Source/model/binary/configuration evidence retained locally in reports/stage4; failures remain available.
+
+Public source archive: `packages/FactoryGalaxy-Stage4-reviewed-source.zip`, generated from the reviewed public tree after delivery documentation. It excludes private records, credentials, weights, datasets, binaries and caches. Archive hash/size, final public commit and content checks are in the local `reports/stage4/delivery.json`; existing licensed Unity/pinned dependencies/frozen models are required. Source portability does not prove performance on another computer.
+
+Stage4 acceptance pending Pietro; noStage5 begun. Exact capacity, acquisition failure, unit correction, resource limits and unproven real-camera reliability in PERFORMANCE.md/VERIFICATION.md. Five-minute walkthrough DEMO.md; actual screenshots screenshots/; charts charts/.
+
+Final runtime closure is `dbc0595` (per-line rates/health, explicit averaging periods, retired-selection clearing and narrow-list fit). The final public PR head is recorded in local delivery.json after the reviewed projection. Earlier public sourcec06222f/documentationd58cd63 are preserved; no force update. Final60-test suite and native display proof supersede the earlier58-test closure, without adding reruns to the count or repeating capacity measurements.

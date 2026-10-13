@@ -6,7 +6,7 @@ The software allocation guard is 48; safe default is one line/CPU. The single bo
 
 Faster live acquisition failed at its first rate with explicit missing-target drops; higher live rates are unproven. Saved-crop replay reached the tested ceiling of 1,200 images/s on both devices, excluding camera/rendering/transport/storage. CPU was sufficient for this model; no GPU advantage claimed.
 
-Verification: 58 offline tests, original Unity checks plus 12 multi-line checks, 29 native functional and 7 native closure assertions passed. New 81-crop integration fixtures agreed with expected synthetic outcomes and between CPU/GPU. No retraining, old locked-test evaluation or new accuracy claim. Cross-origin images have small pixel differences; real-camera validation remains necessary.
+Verification: 60 offline tests, original Unity checks plus 12 multi-line checks, 29 native functional and 7 native closure assertions passed. New 81-crop integration fixtures agreed with expected synthetic outcomes and between CPU/GPU. No retraining, old locked-test evaluation or new accuracy claim. Cross-origin images have small pixel differences; real-camera validation remains necessary.
 
 Preserved previous source/builds/results/models/ledgers. Measurement source is `9ea0b8132c9266778630a93d65a246bd652f3455`; final source/PR IDs are in DELIVERY.md. Original timing-unit error and other failures remain recorded; explicit corrected timing reports do not replace raw evidence. Later safety/metric closure was functionally verified without another capacity cycle.
 

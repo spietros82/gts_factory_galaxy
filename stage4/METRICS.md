@@ -16,3 +16,7 @@
 
 
 Trigger→result=sum of matched direct acquisition wait and capture→result, including camera scheduler wait. Not an AI estimate. Final live panel shows sample count and oldest acquisition age. Frozen9ea writer incorrectly put seconds into acquisition_wait_ms; originals retained and explicit×1000 correction saved. Whole-phase drops include warmup; steady completed rates/deadlines use the measurement window. No completion latency is invented for a dropped target.
+
+Final UI denominator closure: native captured rate uses player lifetime; aggregate accepted/completed rates use backend lifetime. Per-line rate uses the current session's registration interval (reset on new session/backend restart), shown in the line list. These averages are not instantaneous offered rates; phase reports retain their exact steady windows. Frame display uses at most300recent intervals. Line health is deterministic aggregation:Waiting until3current views, Historical onpause, Stale after3s, Uncertain forwithheld/uncertain results, Review fordetected appearance defects, Current forrecent nominal decisions, Off/Unavailable whenappropriate. Current is not industrial approval.
+
+Completed counts include uncertain/withheld outcomes, not verified-good bottles or guaranteed neural calls. Device fields identify the processing backend; withheld metadata/quality checks may execute onlyCPU policy. ActualGPU dense execution is established from positive shader queries and completed valid predictions, not availability/residency alone.

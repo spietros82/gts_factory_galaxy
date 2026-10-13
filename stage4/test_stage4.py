@@ -34,6 +34,16 @@ class Checks(unittest.TestCase):
  def test_unavailable_backend_status(self):
   self.e.backends={};self.e.submit(batch());wait(lambda:not self.e.busy)
   self.assertEqual(self.e.view()['status'],'unavailable');self.assertTrue(all(r['decision']=='uncertain' for r in self.e.records))
+ def test_line_rate_uses_registration_interval(self):
+  self.e.started-=1000;self.e.submit(batch());wait(lambda:not self.e.busy)
+  line=self.e.view()['lines'][0];self.assertLess(line['rate_elapsed_seconds'],2);self.assertGreater(line['inspection_rate'],1)
+  self.assertAlmostEqual(line['inspection_rate']*line['rate_elapsed_seconds'],3,delta=.1)
+ def test_line_inspection_health(self):
+  self.assertEqual(self.e.view()['lines'][0]['inspection_health'],'Waiting')
+  self.e.submit(batch(target=2));wait(lambda:not self.e.busy);self.assertEqual(self.e.view()['lines'][0]['inspection_health'],'Uncertain')
+  self.e.submit(batch());wait(lambda:not self.e.busy);self.assertEqual(self.e.view()['lines'][0]['inspection_health'],'Current')
+  self.e.native={'paused':True};self.assertEqual(self.e.view()['lines'][0]['inspection_health'],'Historical')
+  self.e.native={'inspection':False};self.assertEqual(self.e.view()['lines'][0]['inspection_health'],'Off')
  def test_session_isolation(self):
   self.e.submit(batch());self.e.submit(batch('Line02','s2'));wait(lambda:self.e.counts['completed']==6);self.assertEqual(len(self.e.view('Line01')['results']),3);self.assertTrue(all(r['line_id']=='Line02' for r in self.e.view('Line02')['results']))
  def test_retired_result_not_current(self):

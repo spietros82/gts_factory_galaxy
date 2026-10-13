@@ -21,7 +21,7 @@ No model, threshold or preprocessing change; no training, old locked-test reuse,
 
 ## Verification and remaining limits
 
-58 distinct offline tests passed. Original Unity simulation/presentation/telemetry checks (11/8/15) and 12 new multi-line checks passed. Native functional 29/29 and closure 7/7 passed, including service outage/restart while the simulator continued. New 81-crop integration fixtures agreed with their synthetic expected outcomes and between CPU/GPU; maximum score difference 2.3841858e-7. This is integration consistency, not industrial accuracy. Canonical images at different origins differed by at most one pixel-component byte; no byte-identity claim.
+60 distinct offline tests passed. Original Unity simulation/presentation/telemetry checks (11/8/15) and 12 new multi-line checks passed. Native functional 29/29 and closure 7/7 passed, including service outage/restart while the simulator continued. New 81-crop integration fixtures agreed with their synthetic expected outcomes and between CPU/GPU; maximum score difference 2.3841858e-7. This is integration consistency, not industrial accuracy. Canonical images at different origins differed by at most one pixel-component byte; no byte-identity claim.
 
 Old models, frozen datasets, reports and ledgers remain intact; Qwen ledger still 3/6. Raw evidence is under `reports/stage4/`; public summaries, screenshots and charts under `stage4/`. Performance applies to measured source `9ea0b8132c9266778630a93d65a246bd652f3455`. The original measured Stage 4 binary was replaced by closure builds; source and per-phase metadata survive, but no archived byte-identical candidate binary is claimed. Previous stage builds are preserved.
 
