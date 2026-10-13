@@ -1,8 +1,10 @@
+Window-size follow-up: default1600×900 and resizable, so the application fits this desktop including its title bar. Earlier1920-only presentation instruction is superseded by Pietro’s request for a smaller window; historical benchmarks remain1920×1080.
+
 Compact layout revision: [UI-REVISION.md](UI-REVISION.md). Small side previews; Open evidence expands; grouped navigation/line/product/device controls. Original layout can be launched with STAGE3_BUILD_DIR=builds/stage3-original-layout after stopping the player. No new model/benchmark results.
 
 # Stage 3 — three-station brewery inspection
 
-Native Unity6000.6.5f1 Linux/Built-in/OpenGLCore, sole supported presentation1920×1080. One synthetic line, three image-based assessments of the same simulator-associated bottle. Provisional light Braemac theme, fictional beer identities; exact corporate logo/colour approval not available. Earlier brewery geometry, telemetry contract/mapped mechanisms, product controls and accepted builds retained. Stage3-only transparent-glass shader makes visible liquid boundary inspectable; old inspection configuration/build remains frozen.
+Native Unity6000.6.5f1 Linux/Built-in/OpenGLCore, benchmark presentation1920×1080; normal operator window1600×900, resizable. One synthetic line, three image-based assessments of the same simulator-associated bottle. Provisional light Braemac theme, fictional beer identities; exact corporate logo/colour approval not available. Earlier brewery geometry, telemetry contract/mapped mechanisms, product controls and accepted builds retained. Stage3-only transparent-glass shader makes visible liquid boundary inspectable; old inspection configuration/build remains frozen.
 
 ```bash
 cd /home/braemac/GTS_factory_galaxy
@@ -11,7 +13,7 @@ cd /home/braemac/GTS_factory_galaxy
 journalctl --user -u braemac-factory-stage3-player -u braemac-factory-stage3-service -f
 ```
 
-Native window; no dashboard URL. Own loopback service127.0.0.1:8820. Start reuses own active units, checks ownership/port/readiness; no port-owner kill. Config example→excluded local configuration, endpoint/model/data paths configurable.1920×1080 always; crops stay160×160 and neural features24×24. Source camera configuration stage3/cameras.json / packaged StreamingAssets/stage3-cameras.json; override --stage3-camera-config. Renderer camera isolation/localisation is simulator-assisted, not independent real tracking.
+Native window; no dashboard URL. Own loopback service127.0.0.1:8820. Start reuses own active units, checks ownership/port/readiness; no port-owner kill. Config example→excluded local configuration, endpoint/model/data paths configurable.Normal launch1600×900; override with STAGE3_WIDTH=1920 STAGE3_HEIGHT=1080 for the recorded benchmark configuration. Existing running players must be stopped before launch dimensions change. Crops stay160×160 and neural features24×24. Source camera configuration stage3/cameras.json / packaged StreamingAssets/stage3-cameras.json; override --stage3-camera-config. Renderer camera isolation/localisation is simulator-assisted, not independent real tracking.
 
 Top navigation Machine data / Digital twin / Combined preserves Stage2 concepts.1/2/3 shortcuts; F5–F8 camera views; Space pause/Rreset/Boutfeed/Cclear. Inspection shows three actual crops and selected/actual backend. Examples offers labelled presenter-only synthetic visible defects; these alter bottle appearance, not PLC readings or diagnosed causes. Failure review lists detected defects and uncertain events separately by result wording; select evidence to see image, exact IDs/times/score/timings. Explain this event is a manual local Qwen action. Debug shows bounded measured counters and limitations. No automatic inference explanations or repairs.
 

@@ -1,3 +1,5 @@
+Window-size fix: normal launch1600×900; Stage3-only build enables resizing and restores prior Editor settings after build. Native startup/resize checked,14offline safety checks PASS; operator positive feedback. No new model or benchmark cycle.
+
 Compact layout revision: [UI-REVISION.md](UI-REVISION.md). Small side previews; Open evidence expands; grouped navigation/line/product/device controls. Original layout can be launched with STAGE3_BUILD_DIR=builds/stage3-original-layout after stopping the player. No new model/benchmark results.
 
 # Stage3 final guard and delivery

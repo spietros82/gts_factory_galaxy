@@ -1,3 +1,5 @@
+Window follow-up: normal launch1600×900 and resizable; Pietro reports it is much better. See WINDOW-FIT.md. Historical1920×1080 benchmark results below remain unchanged.
+
 Compact UI revision: 18/18 focused native checks and14offline safety checks PASS; see [revision](UI-REVISION.md). Older counts below are the preserved milestone evaluation. No additional training/locked testing/Qwen requests/benchmarks.
 
 # Stage 3 — three-station visual inspection

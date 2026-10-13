@@ -7,6 +7,9 @@ flock -w 20 9
 player=braemac-factory-stage3-player
 service=braemac-factory-stage3-service
 build_dir="${STAGE3_BUILD_DIR:-builds/stage3}"
+width="${STAGE3_WIDTH:-1600}"
+height="${STAGE3_HEIGHT:-900}"
+[[ "$width" =~ ^[1-9][0-9]{2,3}$ && "$height" =~ ^[1-9][0-9]{2,3}$ ]] || { echo 'STAGE3_WIDTH/HEIGHT must be positive integer pixel dimensions (3–4 digits)'; exit 2; }
 [[ -x "$build_dir/FactoryGalaxy.x86_64" ]] || { echo 'Build first: ./stage3/build.sh'; exit 2; }
 [[ -f stage3/models/policy.json ]] || { echo 'Frozen models absent: see stage3/README.md reproduction instructions'; exit 2; }
 [[ -f stage3/config.local.json ]] || cp stage3/config.example.json stage3/config.local.json
@@ -36,6 +39,6 @@ for _ in range(80):
 else:raise SystemExit('Stage3 service not ready; inspect journalctl --user -u braemac-factory-stage3-service')
 PY
 if ! systemctl --user is-active --quiet "$player"; then
- systemd-run --user --collect --unit="$player" --property=WorkingDirectory="$PWD" "$(realpath -- "$build_dir/FactoryGalaxy.x86_64")" -screen-fullscreen 0 -screen-width 1920 -screen-height 1080 -logFile "$PWD/runtime/stage3-native/player.log" --data-path "$PWD/runtime/stage3-native" --profile 1 --frame-target 60 --presentation true --plc-demo true --stage3 true --stage3-endpoint "$endpoint" "$@"
+ systemd-run --user --collect --unit="$player" --property=WorkingDirectory="$PWD" "$(realpath -- "$build_dir/FactoryGalaxy.x86_64")" -screen-fullscreen 0 -screen-width "$width" -screen-height "$height" -logFile "$PWD/runtime/stage3-native/player.log" --data-path "$PWD/runtime/stage3-native" --profile 1 --frame-target 60 --presentation true --plc-demo true --stage3 true --stage3-endpoint "$endpoint" "$@"
 fi
-echo 'Stage3 started at1920×1080; native window opens shortly. Inspection / Failure review / Debug; Qwen only by explicit action.'
+echo "Stage3 started at ${width}×${height}; resize the native window as needed. Qwen only by explicit action."
