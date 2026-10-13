@@ -28,3 +28,8 @@ First visual review showed a wrapped Speed caption and event timeline below tag-
 FocusedInspection.cs, BreweryPresentation.cs, frozen models/policies and accepted Stage1 executable hashes unchanged. No new captures/classifier requests/LLM calls; no evaluation dataset read for tuning, no retraining, no ledger reset. No new pixel equality or accuracy claim: the old cyan-cap configuration is preserved and disabled for this PLC profile, while current presentation pixels remain unvalidated. Stage1's previous nine fixture comparisons remain historical evidence for that stage only.
 
 This is a simulated adapter, not real PLC/transport validation. State semantics are calculated from current simulated activity/queues; a normal local queue can be Blocked without a fault. Snapshot state persists while simulation_paused is explicit. No historical network-loss transport, physical speed calibration, plant safety/production reliability, real-camera performance or other-host sizing proven. Stage2 user acceptance pending until Pietro tries it.
+
+
+## Stage 2 display correction — 13 October 2026
+
+Fixed retained old panel pixels beside the 3D viewport after view changes by repainting all camera margins with an opaque background. Native rebuilt; six mode transitions at each1600×900/1920×1080 pass margin pixel checks; pause/reset and actual blockage/clear controls pass.159 preserved files and inspector158/158/0 counters unchanged. Prior Stage2 build retained; no inference or simulation/inspection changes. See DISPLAY-FIX.md for actual before/after screenshots, retained automation failures and test limits. Same ./telemetry/start.sh / stop.sh; user correction acceptance pending.

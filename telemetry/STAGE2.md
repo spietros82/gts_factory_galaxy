@@ -34,3 +34,8 @@ Stage2 implementation complete, operator acceptance pending. Stop at this milest
 
 
 Stage2 GitHub closure: PR2 https://github.com/spietros82/gts_factory_galaxy/pull/2 open/unmerged, stacked on Stage1. Reviewed public code9326825, local native d516dd3;163paths verified before documentation-only closure, zero byte/path mismatches. Normal review unit active at1600x900/Combined/Lager/healthy1x, QA flags removed. Prior build/inspection counters preserved. Operator acceptance pending; work stopped at Stage2. See telemetry/GITHUB-DELIVERY.md.
+
+
+## Stage 2 display correction — 13 October 2026
+
+Fixed retained old panel pixels beside the 3D viewport after view changes by repainting all camera margins with an opaque background. Native rebuilt; six mode transitions at each1600×900/1920×1080 pass margin pixel checks; pause/reset and actual blockage/clear controls pass.159 preserved files and inspector158/158/0 counters unchanged. Prior Stage2 build retained; no inference or simulation/inspection changes. See DISPLAY-FIX.md for actual before/after screenshots, retained automation failures and test limits. Same ./telemetry/start.sh / stop.sh; user correction acceptance pending.

@@ -34,3 +34,8 @@ Stage2 implementation complete, operator acceptance pending. Stop at this milest
 
 
 Stage2 GitHub closure: PR2 https://github.com/spietros82/gts_factory_galaxy/pull/2 open/unmerged, stacked on Stage1. Reviewed public code9326825, local native d516dd3;163paths verified before documentation-only closure, zero byte/path mismatches. Normal review unit active at1600x900/Combined/Lager/healthy1x, QA flags removed. Prior build/inspection counters preserved. Operator acceptance pending; work stopped at Stage2. See telemetry/GITHUB-DELIVERY.md.
+
+
+## Stage 2 viewport correction
+
+Repaint opaque camera margins to remove old panel text/buttons after mode changes. Native checks at1600×900 and1920×1080 pass; preserved source/build/inspection counters unchanged, no model calls. See telemetry/DISPLAY-FIX.md for screenshots, retained automation failures and limits.

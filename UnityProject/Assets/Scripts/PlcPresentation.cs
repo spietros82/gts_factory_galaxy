@@ -8,7 +8,7 @@ namespace Braemac.Factory {
   public string Mode="combined";public bool Suspended,Missing;bool lastPaused;double auditAt,pausedPublishAt;
   readonly List<string> timeline=new List<string>();readonly Dictionary<string,string> previous=new Dictionary<string,string>();
   readonly Dictionary<string,TextMesh> signs=new Dictionary<string,TextMesh>();Vector2 scroll;bool raw;
-  GUIStyle title,text,small,button;Texture2D panel;
+  GUIStyle title,text,small,button;Texture2D panel,backdrop;
   public PlcPresentation(FactoryApp app){this.app=app;Mode=FactoryApp.Argument("--telemetry-view","combined");if(Mode!="data"&&Mode!="twin"&&Mode!="combined")Mode="combined";
    int i=0;foreach(string asset in new[]{"infeed","filler","capper","inspection","packer"}){
     var o=new GameObject("Telemetry status "+asset);o.layer=BreweryPresentation.PresentationLayer;o.transform.position=new Vector3(new[]{-11f,-7f,-2f,3f,10f}[i++],1.65f,-1.2f);
@@ -46,7 +46,18 @@ namespace Braemac.Factory {
   void Select(string asset){if(asset=="line"){app.Overview();return;}if(asset=="conveyor"){app.Overview();app.Selected="conveyor";return;}app.RemoteAction("machine",asset);}
   void ModeButton(string label,string value){GUI.backgroundColor=Mode==value?new Color(.25f,.62f,.67f):Color.white;if(GUILayout.Button(label,button))Mode=value;GUI.backgroundColor=Color.white;}
   string Value(string key){var t=Mapping.Frame==null?null:Mapping.Frame.Find("Line01."+key);return Mapping.Quality(t,Time.realtimeSinceStartupAsDouble)=="good"?t.Value:Mapping.Quality(t,Time.realtimeSinceStartupAsDouble);}
-  public void Draw(){Styles();float scale=Mathf.Max(.7f,Screen.width/1600f);GUI.matrix=Matrix4x4.Scale(new Vector3(scale,scale,1));float w=Screen.width/scale,h=Screen.height/scale;
+  void ClearMargins(float scale){
+   // The camera clears only its viewport. Repaint every outside pixel each GUI
+   // frame so old panels cannot survive a mode change or window resize.
+   if(backdrop==null){backdrop=new Texture2D(1,1);var color=app.MainCamera.backgroundColor;color.a=1;backdrop.SetPixel(0,0,color);backdrop.Apply();}
+   Rect pixels=app.MainCamera.pixelRect;
+   float w=Screen.width/scale,h=Screen.height/scale,left=pixels.xMin/scale,right=pixels.xMax/scale,top=(Screen.height-pixels.yMax)/scale,bottom=(Screen.height-pixels.yMin)/scale;
+   if(top>0)GUI.DrawTexture(new Rect(0,0,w,top),backdrop);
+   if(bottom<h)GUI.DrawTexture(new Rect(0,bottom,w,h-bottom),backdrop);
+   if(left>0)GUI.DrawTexture(new Rect(0,top,left,bottom-top),backdrop);
+   if(right<w)GUI.DrawTexture(new Rect(right,top,w-right,bottom-top),backdrop);
+  }
+  public void Draw(){Styles();float scale=Mathf.Max(.7f,Screen.width/1600f);GUI.matrix=Matrix4x4.Scale(new Vector3(scale,scale,1));float w=Screen.width/scale,h=Screen.height/scale;ClearMargins(scale);
    GUI.DrawTexture(new Rect(18,18,w-36,212),panel);GUILayout.BeginArea(new Rect(34,25,w-68,202));
    GUILayout.Label("BRAEMAC  /  BREWERY MACHINE DATA → DIGITAL TWIN",title);
    GUILayout.Label("Simulated PLC telemetry — no physical equipment connected. No AI dependency.",text);
