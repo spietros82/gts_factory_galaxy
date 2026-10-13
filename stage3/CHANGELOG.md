@@ -1,3 +1,5 @@
+Compact layout revision: [UI-REVISION.md](UI-REVISION.md). Small side previews; Open evidence expands; grouped navigation/line/product/device controls. Original layout can be launched with STAGE3_BUILD_DIR=builds/stage3-original-layout after stopping the player. No new model/benchmark results.
+
 # Stage3 final guard and delivery
 
 - Extended language-only negative tests to physical-volume spellings, attachment and label readability;14offline checks, no additional live model call. Vision/render measurements and frozen dataset/model unchanged.

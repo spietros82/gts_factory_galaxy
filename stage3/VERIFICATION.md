@@ -1,3 +1,5 @@
+Compact UI revision: 18/18 focused native checks and14offline safety checks PASS; see [revision](UI-REVISION.md). Older counts below are the preserved milestone evaluation. No additional training/locked testing/Qwen requests/benchmarks.
+
 # Stage 3 verification
 
 Protocol written before training/evaluation in PROTOCOL.md. Final1440crops:864train/288validation/288test,36/12/12complete groups,20groups perproduct. Two adjacent crops/class/group remain together; complete group/seed/appearance split before training. Initial1440development captures and24probe crops retained, total2904acquired≤3000; no additional weight downloads. Codex manually inspected36representative training images and probe sheets; not independent annotation. First opaque-glass/correlated fixture defects corrected before training, locked images never used for tuning. Final condition combinations vary independently across groups; narrow scene still permits synthetic shortcuts.

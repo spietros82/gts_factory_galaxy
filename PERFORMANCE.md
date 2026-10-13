@@ -1,3 +1,5 @@
+Layout revision note: the UI revision in UI-REVISION.md was verified natively without another benchmark cycle. The exact measurements below remain from source1f4e52e and its original viewport. CPU meets the tested small-model three-view acquisition workload; this is not full-video or CPU-Qwen capacity evidence.
+
 # Final Stage3 measured performance
 
 Final implementation1f4e52e, native release Unity6000.6.5f1/Built-in/OpenGLCore/Mono; AI BOX-A395, RyzenAI Max+395/Radeon8060S, Ubuntu24.04.5/Mesa25.2.8. Same1920×1080,60FPS target,VSync0,4MSAA,one line/overview/seed42/process1×; Lager/IPA/Stout20s wall schedule,3controlled views/shared bottle trigger≤every1.5s.

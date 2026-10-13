@@ -1,3 +1,5 @@
+Compact UI revision: 18/18 focused native checks and14offline safety checks PASS; see [revision](UI-REVISION.md). Older counts below are the preserved milestone evaluation. No additional training/locked testing/Qwen requests/benchmarks.
+
 # Stage 3 — three-station visual inspection
 
 Completed local implementation and bounded verification, 1920×1080 only. Pietro accepted Stages1/2; Stage3 operator acceptance remains pending. Source branch stage3-three-station-inspection. Implementation/measurement freeze1f4e52e; later commits contain documentation/publication evidence. Reviewed public history is projected separately from the full local history; stacked PR targets stage2-plc-telemetry. Neither earlier PR nor Stage3 is merged automatically.

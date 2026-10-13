@@ -1,3 +1,5 @@
+Compact layout revision: [UI-REVISION.md](UI-REVISION.md). Small side previews; Open evidence expands; grouped navigation/line/product/device controls. Original layout can be launched with STAGE3_BUILD_DIR=builds/stage3-original-layout after stopping the player. No new model/benchmark results.
+
 # Five-minute Stage 3 walkthrough
 
 Launch ./stage3/start.sh; use1920×1080. This is a synthetic demonstration, not production inspection.

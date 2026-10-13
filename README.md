@@ -1,3 +1,5 @@
+Compact layout revision: [UI-REVISION.md](UI-REVISION.md). Small side previews; Open evidence expands; grouped navigation/line/product/device controls. Original layout can be launched with STAGE3_BUILD_DIR=builds/stage3-original-layout after stopping the player. No new model/benchmark results.
+
 # Stage 3 — three-station brewery inspection
 
 Native Unity6000.6.5f1 Linux/Built-in/OpenGLCore, sole supported presentation1920×1080. One synthetic line, three image-based assessments of the same simulator-associated bottle. Provisional light Braemac theme, fictional beer identities; exact corporate logo/colour approval not available. Earlier brewery geometry, telemetry contract/mapped mechanisms, product controls and accepted builds retained. Stage3-only transparent-glass shader makes visible liquid boundary inspectable; old inspection configuration/build remains frozen.
