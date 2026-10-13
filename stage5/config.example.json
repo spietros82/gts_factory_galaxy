@@ -1,0 +1,13 @@
+{
+  "host": "127.0.0.1",
+  "port": 8840,
+  "data_path": "runtime/stage5-live",
+  "model_path": "stage5/models",
+  "device": "cpu",
+  "input_size": 640,
+  "threads": 4,
+  "queue_capacity": 12,
+  "deadline_seconds": 0.5,
+  "image_limit": 256,
+  "monitoring": true
+}

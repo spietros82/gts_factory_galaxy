@@ -59,3 +59,10 @@ stage3/probe2/
 # Stage4 local evidence, builds and data stay outside public source history.
 reports/stage4/
 stage4/config.local.json
+
+# Stage 5 isolated dependencies, weights and raw data remain local.
+stage5/.venv/
+stage5/downloads/
+stage5/models/
+stage5/config.local.json
+reports/stage5/
