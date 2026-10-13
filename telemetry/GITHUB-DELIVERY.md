@@ -1,0 +1,13 @@
+# Stage 2 delivery record
+
+Branch: stage2-plc-telemetry. PR: https://github.com/spietros82/gts_factory_galaxy/pull/2 — open, not merged. Base stage1-brewery-presentation at87869ee, stacked on unmerged PR1. Repository visibility public, unchanged. Pietro's Stage1 visual acceptance is preserved; Stage2 operator acceptance remains pending.
+
+Local native implementation/test/render source d516dd3. Local source/evidence documentation commit7df65af. Reviewed public code projection9326825e9377e9d475f32db575e0a03bf3af4a48, parent87869ee. Full local history is retained separately; never force-push it over public branches. Initial public publication163files:32 reviewed text overlay files and8 byte-identical reduced native screenshot copies, with all baseline paths retained and no unexpected paths. Verification reports/stage2/github-verification.json. Subsequent documentation-only delivery record may advance the public head, without changing native code/configuration.
+
+The first publication attempt returned no usable blob SHA for CHANGELOG.md; its underlying reason was not captured. The identical-content upload succeeded subsequently. Deterministic Git blob hashes and a fetched byte/path comparison verified the final tree before creating PR2. No branch reference advanced during the incomplete upload; no merge, force push or visibility change. Application tests were unaffected.
+
+Excluded: private/full local history, credentials/tokens, private network configuration, local logs/data, weights, builds, virtual environments and Unity caches. Source, procedural assets and documentation only. No new external assets; presentation/ASSETS.md retains provenance.
+
+Normal reviewer instance: braemac-factory-stage2-player,1600×900/Combined/Lager/healthy seed42/1×/target60, no development/audit flags and no inference. ./telemetry/start.sh (idempotent); ./telemetry/stop.sh; journalctl --user -u braemac-factory-stage2-player -f. QA-created players stopped before starting this normal reviewer instance. Existing inspector service PID41095 remains alive; captured/completed158, explanation calls0. Accepted Stage1 build/launcher preserved via ./presentation/start.sh after stopping Stage2.
+
+Complete handover/walkthrough: STAGE2.md / DEMO.md; schema/diagram: SCHEMA.md; test and measured rendering results: VERIFICATION.md / PERFORMANCE.md. Optional expanded raw JSON is source-inspection UI, not a benchmarked rendering workload; only the defined common healthy view has percentile measurements. No real PLC, new camera inspection, AI, multiple lines, streaming changes or follow-on evaluation. Stop at Stage2.

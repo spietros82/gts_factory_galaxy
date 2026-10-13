@@ -16,6 +16,6 @@ public static class VerifyPresentation {
   Check(capMaterial.color==capColor&&originalBottle.Cap.transform.localScale==capScale,"Original cap materials and geometry preserved");
   bool separate=true;foreach(var t in original.Root.GetComponentsInChildren<Transform>(true))separate&=t.gameObject.layer==BreweryPresentation.LegacyLayer;foreach(var t in presentation.Root.GetComponentsInChildren<Transform>(true))separate&=t.gameObject.layer==BreweryPresentation.PresentationLayer;
   Check(separate,"Dynamic bottles and decoration remain in separate render layers");Check(presentation.VisibleBottles==sim.Bottles.Count,"Presentation bottles match simulation identities/population");Check(!presentation.SetProduct("UNKNOWN"),"Unsupported identity rejected without changing process");
-  Directory.CreateDirectory("../reports/stage1/raw");File.WriteAllText("../reports/stage1/presentation-checks.json","{\"passed\":"+passed+",\"scope\":\"Editor runs real geometry and product implementation; native visual QA separate\"}");
+  Directory.CreateDirectory("../reports/stage1/raw");File.WriteAllText(FactoryApp.Argument("--presentation-check-output","../reports/stage1/presentation-checks.json"),"{\"passed\":"+passed+",\"scope\":\"Editor runs real geometry and product implementation; native visual QA separate\"}");
  }
 }

@@ -7,12 +7,17 @@ using Debug=UnityEngine.Debug;
 namespace Braemac.Factory {
  public sealed class FactoryApp:MonoBehaviour {
   public LineSimulation Sim {get;private set;} public string Selected="line";public int Profile=1;
+  PlcPresentation plc;
   FactoryGeometry geometry;BreweryPresentation brewery;Camera main;float accumulator,speed=1,yaw=10,pitch=30,distance=28;Vector3 target=Vector3.zero;
   bool scenePointerDown;bool paused,technical,showProcedures,measurement,computeTechnical;int tab;Vector2 sidebarScroll;EdgeClient edge;FocusedInspection focused;double started;string screenshotPath="";float quitAfter;bool screenshotSaved;
   float presentationAuditAt;
   [Serializable] public class PresentationAudit {public string product,view;public bool paused;public double sim_time;public int packed,produced,bottles;public float first_bottle_x,capper_angle,head_y;public int first_bottle_id;}
   List<float> frames=new List<float>();List<double> frameWall=new List<double>();List<double> tickTimes=new List<double>();
   GUIStyle title,heading,text,small,button,toggle;Texture2D panel;string dataPath;
+  public bool Measurement{get{return measurement;}}
+  public float FrameMilliseconds{get{return dtMean();}}
+  public float SimulationSpeed{get{return speed;}set{speed=Mathf.Clamp(value,.25f,8);}}
+  public void TogglePause(){paused=!paused;}
   public bool Paused{get{return paused;}}
   public bool PresentationEnabled{get;private set;}
   public bool ExplanationsDisabled{get;private set;}
@@ -42,27 +47,29 @@ namespace Braemac.Factory {
    if(PresentationEnabled){BreweryPresentation.ConfigureLights(sun,rim);Overview();SelectPresentationView(Argument("--presentation-view","overview"));}
    if(Argument("--focused-inspection","false")=="true"){focused=gameObject.AddComponent<FocusedInspection>();edge=gameObject.AddComponent<EdgeClient>();edge.enabled=false;}else edge=gameObject.AddComponent<EdgeClient>();
    if(Argument("--comparison-camera","false")=="true"){target=Vector3.zero;distance=28;yaw=10;pitch=30;}
+   if(Argument("--plc-demo","false")=="true"){Profile=1;ExplanationsDisabled=true;plc=new PlcPresentation(this);}
    started=Time.realtimeSinceStartupAsDouble;
    if(Argument("--stream-path")!="")gameObject.AddComponent<StreamBridge>();
   }
   void Update(){
    float dt=Time.unscaledDeltaTime;if(frames.Count<120000){frames.Add(dt*1000);frameWall.Add(Time.realtimeSinceStartupAsDouble-started);}
    if(!paused){accumulator+=Mathf.Min(dt,.25f)*speed;int steps=0;
-    while(accumulator>=LineSimulation.TickSeconds&&steps++<40){var sw=Stopwatch.StartNew();Sim.Step();sw.Stop();tickTimes.Add(sw.Elapsed.TotalMilliseconds);accumulator-=(float)LineSimulation.TickSeconds;}
+    while(accumulator>=LineSimulation.TickSeconds&&steps++<40){var sw=Stopwatch.StartNew();Sim.Step();if(plc!=null)plc.Capture();sw.Stop();tickTimes.Add(sw.Elapsed.TotalMilliseconds);accumulator-=(float)LineSimulation.TickSeconds;}
    }
    if(Input.GetKeyDown(KeyCode.F12))ScreenCapture.CaptureScreenshot(Path.Combine(dataPath,"screen-"+DateTime.UtcNow.ToString("yyyyMMddTHHmmssZ")+".png"));
+   if(plc!=null)plc.Update();
    if(Input.GetKeyDown(KeyCode.F2))tab=0;if(Input.GetKeyDown(KeyCode.F3))tab=1;if(Input.GetKeyDown(KeyCode.F4))tab=2;
    if(!measurement&&Input.GetKeyDown(KeyCode.Space))paused=!paused;
    if(!measurement&&Input.GetKeyDown(KeyCode.Home))Overview();
    if(PresentationEnabled&&!measurement){if(Input.GetKeyDown(KeyCode.F5))Overview();if(Input.GetKeyDown(KeyCode.F6))SelectPresentationView("filler");if(Input.GetKeyDown(KeyCode.F7))SelectPresentationView("capper");if(Input.GetKeyDown(KeyCode.F8))SelectPresentationView("inspection");}
-   float uiScale=Mathf.Max(.7f,Screen.width/1600f);bool ui=Input.mousePosition.y>Screen.height-(PresentationEnabled?175:150)*uiScale||Input.mousePosition.x>Screen.width-365*uiScale;
+   float uiScale=Mathf.Max(.7f,Screen.width/1600f);bool ui=plc!=null?(plc.Mode=="data"||Input.mousePosition.y>Screen.height-240*uiScale||Input.mousePosition.y<65*uiScale||Input.mousePosition.x>Screen.width*(plc.Mode=="combined"?.63f:.77f)):Input.mousePosition.y>Screen.height-(PresentationEnabled?175:150)*uiScale||Input.mousePosition.x>Screen.width-365*uiScale;
    if(Input.GetMouseButtonDown(0))scenePointerDown=!ui;
    if(!measurement&&!ui){distance=Mathf.Clamp(distance-Input.mouseScrollDelta.y*1.3f,7,42);
     if(Input.GetMouseButton(1)){yaw+=Input.GetAxis("Mouse X")*3;pitch=Mathf.Clamp(pitch-Input.GetAxis("Mouse Y")*2,20,70);}
     if(Input.GetMouseButtonUp(0)&&scenePointerDown){RaycastHit hit;if(Physics.Raycast(main.ScreenPointToRay(Input.mousePosition),out hit,100)){var pick=hit.collider.GetComponent<MachinePick>();if(pick!=null){Selected=pick.Asset;target=pick.Focus;distance=11;}}}
    }
    main.transform.position=target+Quaternion.Euler(pitch,yaw,0)*new Vector3(0,0,-distance);main.transform.LookAt(target+Vector3.up*.8f);
-   geometry.Update(Sim,paused?1:accumulator/(float)LineSimulation.TickSeconds,main);if(brewery!=null)brewery.Update(Sim,main);
+   geometry.Update(Sim,paused?1:accumulator/(float)LineSimulation.TickSeconds,main,plc==null?null:plc.Mapping,Time.realtimeSinceStartupAsDouble);if(brewery!=null)brewery.Update(Sim,main);if(plc!=null)plc.AfterVisual();
    if(PresentationEnabled&&Argument("--presentation-audit","false")=="true"&&Time.realtimeSinceStartup>=presentationAuditAt){presentationAuditAt=Time.realtimeSinceStartup+.25f;var state=new PresentationAudit{product=PresentationProduct,view=Selected,paused=paused,sim_time=Sim.Time,packed=Sim.Packed,produced=Sim.Produced,bottles=Sim.Bottles.Count,capper_angle=Sim.CapperRotation,head_y=geometry.Moving["head0"].localPosition.y};if(Sim.Bottles.Count>0){state.first_bottle_id=Sim.Bottles[0].Id;state.first_bottle_x=geometry.Products[state.first_bottle_id].Root.transform.position.x;}File.WriteAllText(Path.Combine(dataPath,"presentation-audit.json"),JsonUtility.ToJson(state));}
    if(!screenshotSaved&&screenshotPath!=""&&Time.realtimeSinceStartupAsDouble-started>=double.Parse(Argument("--screenshot-after","5"),System.Globalization.CultureInfo.InvariantCulture)){Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(screenshotPath)));ScreenCapture.CaptureScreenshot(screenshotPath);screenshotSaved=true;}
    if(quitAfter>0&&Time.realtimeSinceStartupAsDouble-started>=quitAfter)Application.Quit();
@@ -71,7 +78,7 @@ namespace Braemac.Factory {
   string StationSummary(){switch(Selected){case "infeed":return "Empty amber bottles enter from the left and move towards the filler.";case "filler":return "Four filling heads dispense the simulated 500 mL beer. Watch the contents rise while the heads cycle.";case "capper":return "A rotating turret applies caps after filling. Cap animation follows the existing simulation.";case "inspection":return "Bottles pass the cap inspection station. Entry / Evidence uses the preserved legacy inspection image, not the decorated brewery view.";case "packer":return "Finished bottles accumulate in the finite buffer and leave through packing. The existing outfeed fault restricts this stage.";default:return "One brewery bottling line: empty bottles → filling → capping → inspection → packing. Right-drag to orbit; scroll to zoom.";}}
   public bool SelectProduct(string product){return brewery!=null&&brewery.SetProduct(product);}
   public void SelectPresentationView(string asset){if(asset=="overview"){Overview();return;}float x=asset=="filler"?-7:asset=="capper"?-2:asset=="inspection"?3:0;if(asset!="filler"&&asset!="capper"&&asset!="inspection")return;Selected=asset;target=new Vector3(x,1.45f,0);distance=asset=="filler"?9:7.5f;yaw=-12;pitch=24;}
-  public void ResetLine(){Sim=new LineSimulation(42);for(int pre=0;pre<800;pre++)Sim.Step();accumulator=0;paused=false;if(focused!=null)focused.NewSession();}
+  public void ResetLine(){Sim=new LineSimulation(42);for(int pre=0;pre<800;pre++)Sim.Step();accumulator=0;paused=false;if(focused!=null)focused.NewSession();if(plc!=null)plc.Reset();}
   // Semantic, application-only input. Never inject desktop keys or OS commands.
   public string RemoteAction(string action,string value){
    if(measurement)return "rejected: measurement controls held";
@@ -81,7 +88,7 @@ namespace Braemac.Factory {
     case "overview":Overview();break;
     case "reset":ResetLine();break;
     case "fault":if(value!="cap"&&value!="fill"&&value!="outfeed")return "rejected: fault";Sim.PresenterFault(value);break;
-    case "profile":int n;if(!int.TryParse(value,out n)||n<1||n>3)return "rejected: profile";Profile=n;break;
+    case "profile":if(plc!=null)return "rejected: PLC telemetry demonstration has no AI workload";int n;if(!int.TryParse(value,out n)||n<1||n>3)return "rejected: profile";Profile=n;break;
     case "tab":if(value=="line")tab=0;else if(value=="evidence")tab=1;else if(value=="ai")tab=2;else return "rejected: tab";break;
     case "explain":if(ExplanationsDisabled)return "rejected: explanations disabled for visual review";if(focused!=null){focused.Explain();tab=2;break;}if(Profile<2)return "rejected: select edge profile";edge.RequestAssistant();tab=2;break;
     case "zoom":if(value=="in")distance=Mathf.Max(7,distance-2);else if(value=="out")distance=Mathf.Min(42,distance+2);else return "rejected: zoom";break;
@@ -98,6 +105,7 @@ namespace Braemac.Factory {
    small=new GUIStyle(text){fontSize=12};button=new GUIStyle(GUI.skin.button){fontSize=14,fixedHeight=32};toggle=new GUIStyle(GUI.skin.toggle){fontSize=13,wordWrap=true};
   }
   public void OnGUI(){
+   if(plc!=null){plc.Draw();return;}
    Styles();float scale=Mathf.Max(.7f,Screen.width/1600f);GUI.matrix=Matrix4x4.Scale(new Vector3(scale,scale,1));float w=Screen.width/scale,h=Screen.height/scale;
    GUI.DrawTexture(new Rect(18,18,w-36,PresentationEnabled?145:112),panel);GUILayout.BeginArea(new Rect(34,25,w-68,PresentationEnabled?133:100));
    GUILayout.BeginHorizontal();GUILayout.Label("BRAEMAC  /  GTS FACTORY GALAXY",title);GUILayout.FlexibleSpace();GUILayout.Label("SYNTHETIC DIGITAL TWIN • OBSERVE & ADVISE",small);GUILayout.EndHorizontal();

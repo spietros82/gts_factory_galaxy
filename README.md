@@ -1,46 +1,27 @@
-# Stage 1 — brewery presentation
+# Stage 2 — machine data to brewery digital twin
 
-One existing synthetic bottling line with fictional Braemac Lager / IPA / Stout identities. Product selection changes visual materials only. Production logic, bottle IDs and process clock remain the existing LineSimulation implementation.
+Native Unity6000.6.5f1 Linux release / Built-in / OpenGLCore, one synthetic brewery line. No AI, physical PLC or Python/model service is required for the data/3D workflow. Existing inspector configuration is preserved; PLC profile prevents capture and inference. The inherited inspector may read loopback status if available; its absence does not drive any Stage2 finding or animation.
 
-## Installed machine
+## Launch / stop
 
-```bash
-cd /home/braemac/GTS_factory_galaxy
-./presentation/start.sh
-./presentation/stop.sh
-journalctl --user -u braemac-factory-stage1-player -f
-```
-
-Start is idempotent. New native build: `builds/stage1/FactoryGalaxy.x86_64`. User unit: `braemac-factory-stage1-player`. Existing inspection service is reused without restarting it or resetting its explanation budget. Stop stops only the Stage 1 player. Prior player and streaming units are untouched. No language-model calls are enabled by this launch.
-
-Use LAGER / IPA / STOUT in the top bar. Views: Overview F5/Home; Filler F6; Capper F7; Inspection F8. Existing machine clicking, right-drag orbit, mouse-wheel zoom, Pause/Space, Reset replay and speed controls remain. Product selection survives process replay reset. The initial profile is PLC-only; Entry → Evidence shows the preserved inspection image separately.
-
-1920×1080: `STAGE1_WIDTH=1920 STAGE1_HEIGHT=1080 ./presentation/start.sh` after stopping this Stage 1 player. Other desktop dimensions are unverified.
-
-## Prior working demonstration
+From the project:
 
 ```bash
-./presentation/stop.sh
-./inspection/start.sh
-# stop that prior player/service with ./inspection/stop.sh when desired
+./telemetry/start.sh
+./telemetry/stop.sh
+journalctl --user -u braemac-factory-stage2-player -f
 ```
 
-The prior `builds/inspection` executable and its original launcher/configuration remain untouched. The earlier original `./start.sh` / `./stop.sh` paths are also retained. Source baseline tag: `stage1-working-baseline-20261013` at9f9be74. Do not checkout over user changes. Inspection raw data, frozen classifier, policies and held-out dataset remain on the host.
+Stop Stage2 before changing dimensions:
+`STAGE2_WIDTH=1920 STAGE2_HEIGHT=1080 ./telemetry/start.sh`.
+Native window, no dashboard URL or new listener. Entry point builds/stage2/FactoryGalaxy.x86_64; its user unit starts only this player, does not manage inspection/Ollama/other applications. Launch is idempotent and ownership-checked. `./telemetry/build.sh` uses the already-installed licensed Editor and writes Stage2 builds only. Set UNITY_EDITOR for another compatible licensed path. No driver/package/model install.
 
-## Build and source delivery
+Normal default is Combined / Lager / healthy seed42 /1× / target60FPS. 1/2/3 choose Machine data / Digital twin / Combined; F5/Home overview, F6 filler, F7 capper, F8 inspection. LAGER/IPA/STOUT change identity only. Space pause, R reset(new session), B start outfeed blockage, C clear. Top buttons expose those actions. Right-drag orbit, scroll zoom, machine clicking retained; clicking a tag focuses its machine. Tables scroll; the event timeline is separate. F12 records a native screenshot in the runtime directory. No AI controls or automatic inference.
 
-`./presentation/build.sh` uses installed licensed Unity6000.6.5f1 and writes only builds/stage1. Set UNITY_EDITOR for another licensed Editor path. Existing Python dependencies are used; no installation performed. Shared service requires the locally preserved trusted cap-rf artifact, never an uploaded/untrusted pickle. The public source delivery intentionally excludes model weights and dataset/runtime evidence.
+Prior accepted version remains runnable: `./telemetry/stop.sh`, then `./presentation/start.sh`; stop it with `./presentation/stop.sh`. Original Stage1 binary/launcher untouched; source baseline45f3500 / public87869ee. Avoid running both render windows simultaneously for a customer walkthrough. Earlier inspector/streaming projects remain preserved.
 
-On a compatible host with no frozen inspection artifact, build the native source and launch the executable directly with `--presentation true --focused-inspection true --profile 1 --disable-explanations true`. The visual PLC-only line runs; inspection service is unavailable, not fabricated. Supply trusted authorised model/configuration separately to enable the old inspector. Cross-host performance and graphics compatibility are untested.
+## Scope and honest limits
 
-## Inspection boundary
+All data is synthetic; calculations are explicitly tagged. Station mechanisms/status consume the telemetry contract. Continuous bottle path, fill appearance and cap attachment still follow the original simulator directly. Outfeed blockage is the original slow-pack scenario, not an immediate full stop. Queue spacing gives delayed upstream response; clearing restores cadence. Alarm history remains historical. Pause is explicitly different from fault. Stale/missing tags become Stale/Unknown and withhold mechanism updates.
 
-Old scene objects use render layer8; brewery objects use9. Original key/rim lighting is restricted to8, presentation lights to9. Original camera transform, optics, resolution, material values, cap dimensions and ROI association remain. The main presentation camera excludes8; focused inspection camera sees8 only. Original RenderSettings remain unchanged. No reflection probe/global lighting change introduced.
-
-This is a preserved alternate inspection view, not a claim that Lager/IPA/Stout glass or labels are represented in the classifier's input. Upgraded presentation pixels are NOT validated for inspection accuracy. See inspection-compatibility evidence and Stage1 report for the bounded pixel comparison. There was no training, held-out evaluation, threshold change or Qwen call in this stage.
-
-## Checks and evidence
-
-See STAGE1.md, VERIFICATION.md, PERFORMANCE.md, ASSETS.md and reports/stage1. Short rendering runs hold the original overview camera, 1600×900, cap60/VSync0, 4MSAA, normal seed42/1×, PLC-only. Five warm-up seconds excluded from each35-second run. No inference or claim of per-process GPU allocation.
-
-Public GitHub delivery is a reviewed source-only history based on a clean baseline; the full local history and previous evidence remain preserved separately. No credentials, private addresses/configurations, raw logs/data, Unity caches, builds or weights are published.
+No inspection models/budgets/held-out sets changed or inference called. The old cyan-cap capture configuration remains distinct from the unvalidated new brewery materials. This stage adds no cameras, lines, transports or streaming work. User acceptance pending until Pietro reviews Stage2. See SCHEMA.md, DEMO.md, VERIFICATION.md, PERFORMANCE.md and STAGE2.md.
