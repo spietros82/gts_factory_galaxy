@@ -1,0 +1,7 @@
+# Reused dependencies and assets
+
+Unity6000.6.5f1 LinuxStandalone Mono/Built-in/OpenGLCore. Existing licensed installation; no new Unity modules/assets installed. Python3.12.3; existing stage3/.venv with NumPy2.3.5, Pillow11.3.0, ModernGL5.12.0, glcontext3.0.0 and factoryenvironment via existing .pth. NumPy BSD, Pillow HPND, ModernGL/glcontext MIT; original dependency manifests retained in stage3/DEPENDENCIES.md. No downloads, new packages, model training or global changes in Stage4.
+
+Models: existing locally authored MLP48 cap/fill/label float32weights, Stage3policyhashes verified by backend at load. Source/reproduction stage3/MODEL.md; weights/datasets excluded from public Git/package. Source licence does not automatically grant third-party training-data/weight redistribution; no bundled weights. Existing procedural geometry/textures and fictional Braemac beer identity reused; no external asset additions. Trained model scores uncalibrated; synthetic-only Stage3quality claims remain scoped to that evaluation. Newly rendered integration evidence is separate.
+
+GPU actual execution verified by frozen OpenGL compute backend renderer, shader query times and same-weight CPU/GPUagreement; no CUDA, ROCm vision or NPU claim. Unity rendering GPU, camera render/readbackmainthread+GPU, PNG/preprocess/storage/schedulingCPU. Overall amdgpu busy is device-wide; no task allocation percentages.

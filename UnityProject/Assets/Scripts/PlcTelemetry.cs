@@ -8,16 +8,18 @@ namespace Braemac.Factory {
   public string Value {get{return !has_value?"Unknown":type=="bool"?(boolean?"True":"False"):type=="string"?text:number.ToString(type=="int"?"0":"0.00",CultureInfo.InvariantCulture);}}
  }
  [Serializable] public sealed class PlcFrame {
-  public string schema="gts.plc/2.0",session;public long sequence;public double source_time;public bool simulation_paused;public PlcTag[] tags;
+  public string schema="gts.plc/2.0",session,line_id="Line01";public long sequence;public double source_time;public bool simulation_paused;public PlcTag[] tags;
   public PlcTag Find(string name){foreach(var t in tags)if(t.name==name)return t;return null;}
  }
  // A replaceable local adapter, not a PLC driver. All process values originate in the one LineSimulation.
  public sealed class SimulatedPlcAdapter {
+  public readonly string LineId;
+  public SimulatedPlcAdapter(string lineId="Line01"){LineId=lineId;}
   public string Session {get;private set;}=Guid.NewGuid().ToString("N");long sequence;
   public PlcFrame Capture(LineSimulation s,bool paused){
    var tags=new List<PlcTag>();
-   Action<string,string,string,double,string> num=(asset,name,unit,v,type)=>tags.Add(new PlcTag{asset=asset,name="Line01."+name,type=type,unit=unit,number=v,source_time=s.Time,origin="calculated from simulator"});
-   Action<string,string,bool,string> flag=(asset,name,v,origin)=>tags.Add(new PlcTag{asset=asset,name="Line01."+name,type="bool",unit="boolean",boolean=v,source_time=s.Time,origin=origin});
+   Action<string,string,string,double,string> num=(asset,name,unit,v,type)=>tags.Add(new PlcTag{asset=asset,name=LineId+"."+name,type=type,unit=unit,number=v,source_time=s.Time,origin="calculated from simulator"});
+   Action<string,string,bool,string> flag=(asset,name,v,origin)=>tags.Add(new PlcTag{asset=asset,name=LineId+"."+name,type="bool",unit="boolean",boolean=v,source_time=s.Time,origin=origin});
    double moved=0;int moving=0;
    foreach(var b in s.Bottles)if(!b.Rejected&&b.X>b.PreviousX+.00001){moved+=(b.X-b.PreviousX)/LineSimulation.TickSeconds;moving++;}
    flag("conveyor","Conveyor.Running",moving>0,"calculated from simulator motion");num("conveyor","Conveyor.Speed","scene units/s",moving==0?0:moved/moving,"float");
@@ -33,12 +35,12 @@ namespace Braemac.Factory {
     }
     string state=active?"Running":queued?"Blocked":present?"Stopped":"Waiting";
     if(asset=="packer"&&s.OutfeedRestricted)state="Blocked";
-    tags.Add(new PlcTag{asset=asset,name="Line01."+char.ToUpperInvariant(asset[0])+asset.Substring(1)+".State",type="string",unit="state",text=state,source_time=s.Time,origin="calculated activity / queue state"});
+    tags.Add(new PlcTag{asset=asset,name=LineId+"."+char.ToUpperInvariant(asset[0])+asset.Substring(1)+".State",type="string",unit="state",text=state,source_time=s.Time,origin="calculated activity / queue state"});
    }
    for(int h=0;h<4;h++){double stroke=0;foreach(var b in s.Bottles)if(b.Stage==1&&b.Head==h)stroke=Math.Sin(Math.PI*b.Dwell/.7);num("filler","Filler.Head"+(h+1)+".PositionY","scene units",1.95-stroke*.12,"float");}
    num("capper","Capper.Angle","degrees",s.CapperRotation,"float");
    num("packer","Packer.PusherZ","scene units",Math.Sin(Math.PI*Math.Min(1,Math.Max(0,(s.Time-s.LastPackedTime)/.45)))*.4,"float");
-   return new PlcFrame{session=Session,sequence=++sequence,source_time=s.Time,simulation_paused=paused,tags=tags.ToArray()};
+   return new PlcFrame{line_id=LineId,session=Session,sequence=++sequence,source_time=s.Time,simulation_paused=paused,tags=tags.ToArray()};
   }
  }
  // This is the presentation boundary. Unknown values are never defaulted to running or zero.

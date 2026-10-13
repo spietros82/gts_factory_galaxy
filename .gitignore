@@ -55,3 +55,7 @@ stage3/dataset-first-development-capture/
 stage3/probe/
 
 stage3/probe2/
+
+# Stage4 local evidence, builds and data stay outside public source history.
+reports/stage4/
+stage4/config.local.json

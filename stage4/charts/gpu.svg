@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="470" viewBox="0 0 940 470">
+<rect width="100%" height="100%" fill="white"/>
+<text x="24" y="32" font-family="sans-serif" font-size="21" fill="#142838">Device-wide GPU — includes all background workloads</text>
+<path d="M88,398.0H910" stroke="#e4e9ec"/>
+<text x="76" y="403.0" text-anchor="end" font-family="sans-serif" font-size="13">0.0</text>
+<path d="M88,332.0H910" stroke="#e4e9ec"/>
+<text x="76" y="337.0" text-anchor="end" font-family="sans-serif" font-size="13">4.6</text>
+<path d="M88,266.0H910" stroke="#e4e9ec"/>
+<text x="76" y="271.0" text-anchor="end" font-family="sans-serif" font-size="13">9.3</text>
+<path d="M88,200.0H910" stroke="#e4e9ec"/>
+<text x="76" y="205.0" text-anchor="end" font-family="sans-serif" font-size="13">13.9</text>
+<path d="M88,134.0H910" stroke="#e4e9ec"/>
+<text x="76" y="139.0" text-anchor="end" font-family="sans-serif" font-size="13">18.5</text>
+<path d="M88,68.0H910" stroke="#e4e9ec"/>
+<text x="76" y="73.0" text-anchor="end" font-family="sans-serif" font-size="13">23.1</text>
+<text x="88.0" y="423" text-anchor="middle" font-family="sans-serif" font-size="14">1</text>
+<text x="321.276262002576" y="423" text-anchor="middle" font-family="sans-serif" font-size="14">3</text>
+<text x="468.457196501932" y="423" text-anchor="middle" font-family="sans-serif" font-size="14">6</text>
+<text x="615.638131001288" y="423" text-anchor="middle" font-family="sans-serif" font-size="14">12</text>
+<text x="762.819065500644" y="423" text-anchor="middle" font-family="sans-serif" font-size="14">24</text>
+<text x="910.0" y="423" text-anchor="middle" font-family="sans-serif" font-size="14">48</text>
+<path d="M88.00,299.18 L321.28,313.44 L468.46,292.04 L615.64,263.18 L762.82,210.54 L910.00,177.29" fill="none" stroke="#087e8b" stroke-width="2"/>
+<circle cx="88.0" cy="299.175975301712" r="5" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 1 lines explore: 6.929%, PASS</title></circle>
+<circle cx="321.276262002576" cy="313.4392365983722" r="5" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 3 lines explore: 5.929%, PASS</title></circle>
+<circle cx="468.457196501932" cy="292.044344653382" r="5" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 6 lines explore: 7.429%, PASS</title></circle>
+<circle cx="615.638131001288" cy="263.17822060061746" r="5" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 12 lines explore: 9.452%, PASS</title></circle>
+<circle cx="762.819065500644" cy="210.53999438675274" r="5" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 24 lines explore: 13.143%, PASS</title></circle>
+<circle cx="910.0" cy="177.29479888325923" r="5" fill="#087e8b" stroke="#d02323" stroke-width="2"><title>full-cpu 48 lines explore: 15.474%, FAIL</title></circle>
+<circle cx="762.819065500644" cy="216.34970530451864" r="3" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 24 lines confirm1: 12.736%, PASS</title></circle>
+<circle cx="762.819065500644" cy="212.57760314341846" r="3" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 24 lines confirm2: 13.000%, PASS</title></circle>
+<circle cx="910.0" cy="183.34381139489196" r="3" fill="#087e8b" stroke="#d02323" stroke-width="2"><title>full-cpu 48 lines confirm1: 15.050%, FAIL</title></circle>
+<circle cx="910.0" cy="187.70530451866404" r="3" fill="#087e8b" stroke="#d02323" stroke-width="2"><title>full-cpu 48 lines confirm2: 14.744%, FAIL</title></circle>
+<text x="88" y="56" font-family="sans-serif" font-size="13" fill="#087e8b">full-cpu</text>
+<path d="M88.00,298.16 L321.28,306.31 L468.46,283.55 L615.64,248.91 L762.82,182.69 L910.00,100.25" fill="none" stroke="#a23b85" stroke-width="2"/>
+<circle cx="88.0" cy="298.15717092337917" r="5" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 1 lines explore: 7.000%, PASS</title></circle>
+<circle cx="321.276262002576" cy="306.3076059500421" r="5" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 3 lines explore: 6.429%, PASS</title></circle>
+<circle cx="468.457196501932" cy="283.55430816727477" r="5" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 6 lines explore: 8.024%, PASS</title></circle>
+<circle cx="615.638131001288" cy="248.91495930395735" r="5" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 12 lines explore: 10.452%, PASS</title></circle>
+<circle cx="762.819065500644" cy="182.6926747123211" r="5" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 24 lines explore: 15.095%, PASS</title></circle>
+<circle cx="910.0" cy="100.25442043222006" r="5" fill="#a23b85" stroke="#d02323" stroke-width="2"><title>full-gpu 48 lines explore: 20.875%, FAIL</title></circle>
+<circle cx="762.819065500644" cy="179.21607672072193" r="3" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 24 lines confirm1: 15.339%, PASS</title></circle>
+<circle cx="762.819065500644" cy="180.75049115913558" r="3" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 24 lines confirm2: 15.231%, PASS</title></circle>
+<circle cx="910.0" cy="100.00392927308445" r="3" fill="#a23b85" stroke="#d02323" stroke-width="2"><title>full-gpu 48 lines confirm1: 20.893%, FAIL</title></circle>
+<circle cx="910.0" cy="100.00392927308445" r="3" fill="#a23b85" stroke="#d02323" stroke-width="2"><title>full-gpu 48 lines confirm2: 20.893%, FAIL</title></circle>
+<text x="323" y="56" font-family="sans-serif" font-size="13" fill="#a23b85">full-gpu</text>
+<path d="M88.00,299.52 L321.28,313.44 L468.46,297.14 L615.64,267.59 L762.82,215.97 L910.00,105.26" fill="none" stroke="#657181" stroke-width="2"/>
+<circle cx="88.0" cy="299.51557676115635" r="5" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 1 lines explore: 6.905%, PASS</title></circle>
+<circle cx="321.276262002576" cy="313.4392365983722" r="5" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 3 lines explore: 5.929%, PASS</title></circle>
+<circle cx="468.457196501932" cy="297.1383665450463" r="5" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 6 lines explore: 7.071%, PASS</title></circle>
+<circle cx="615.638131001288" cy="267.5930395733932" r="5" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 12 lines explore: 9.143%, PASS</title></circle>
+<circle cx="762.819065500644" cy="215.97361773786133" r="5" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 24 lines explore: 12.762%, PASS</title></circle>
+<circle cx="910.0" cy="105.26354195902326" r="5" fill="#657181" stroke="#d02323" stroke-width="2"><title>render-cpu 48 lines explore: 20.524%, FAIL</title></circle>
+<circle cx="762.819065500644" cy="213.9805468775162" r="3" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 24 lines confirm1: 12.902%, PASS</title></circle>
+<circle cx="762.819065500644" cy="216.43569841218718" r="3" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 24 lines confirm2: 12.730%, PASS</title></circle>
+<circle cx="910.0" cy="99.40680859286937" r="3" fill="#657181" stroke="#d02323" stroke-width="2"><title>render-cpu 48 lines confirm1: 20.934%, FAIL</title></circle>
+<circle cx="910.0" cy="98.0" r="3" fill="#657181" stroke="#d02323" stroke-width="2"><title>render-cpu 48 lines confirm2: 21.033%, FAIL</title></circle>
+<text x="558" y="56" font-family="sans-serif" font-size="13" fill="#657181">render-cpu</text>
+<text x="470.0" y="452" text-anchor="middle" font-family="sans-serif" font-size="14">Active independent lines (log2 positions); small dots = confirmations</text>
+<text x="18" y="235.0" transform="rotate(-90 18 235.0)" text-anchor="middle" font-family="sans-serif" font-size="14">amdgpu GPU busy mean (%)</text>
+</svg>
