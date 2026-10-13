@@ -1,0 +1,7 @@
+# Stage 2 checks defined before evaluation
+
+C# checks: typed unique source tags, exact counts/positions, stale/absent/missing handling, paused timestamps, new reset session, gradual restriction, accumulation, delayed upstream response, recovery and historical alarms, JSON round-trip. Native: all three modes; actual product/view controls; tag → machine and machine → tag association; pause retained time; reset new session/timeline; blockage build-up then recovery; stale presentation and held mechanism; missing filler Unknown. Existing production, presentation and offline inspector suites must remain passing. Desktop 1600×900 and1920×1080 screenshots reviewed separately.
+
+Rendering comparison: accepted Stage 1 binary versus Stage 2 combined mode with the original common full-viewport camera override. Two 35-second runs each, first five seconds excluded; 1600×900/60 target/VSync0/4MSAA/seed42/1×/healthyPLC. Same existing background-service state. Whole-device GPU counters are not process allocation. No AI or camera inference, held-out evaluation, settings changes or request-budget resets.
+
+Native QA uses --telemetry-dev true and --telemetry-audit true only, F9 publication outage and F10 filler missing injection. These bounded local tests alter adapter output only, not physical telemetry. All failures retained in reports/stage2/raw. User acceptance pending until Pietro tries Stage 2.

@@ -32,6 +32,8 @@ namespace Braemac.Factory {
    else if(scenario=="cap")capProblem=true;
    else throw new ArgumentException("Unsupported presenter scenario");
   }
+  public bool OutfeedRestricted {get{return restrictOutfeed;}}
+  public void ClearOutfeed(){restrictOutfeed=false;nextPacked=Math.Min(nextPacked,Time+.5);}
   public int BufferCount {get{int n=0;foreach(var b in Bottles)if(!b.Rejected&&b.X>=5)n++;return n;}}
   public int ActiveCount {get{int n=0;foreach(var b in Bottles)if(!b.Rejected)n++;return n;}}
   public void Step(){

@@ -1,24 +1,30 @@
-# Stage 1 verification
+# Stage 2 acceptance evidence
 
-Completed on the installed A395; not customer acceptance or cross-host proof.
+Expected checks were written in ACCEPTANCE.md before evaluation. No physical equipment, AI inference, held-out inspection evaluation or request-budget reset.
 
-- Native Linux release built with Unity6000.6.5f1, Built-in pipeline. Prior build folders456 files and existing local configurations retained and hash checked.
--18 existing Python regression checks PASS;17 focused-inspection checks PASS;5 existing startup checks PASS. Fake/offline adapters only; no Qwen/Gemma request.
--11 existing C# simulation checks PASS, including healthy flow, conservation, seeded replay, existing faults/alarms and missing observations. Output redirected to Stage1 to preserve earlier results.
--8 new Editor checks PASS: all three product selectors, no process-state mutation, old cap geometry/material unchanged, original/presentation layer separation including dynamic bottles, matching population and unsupported identity handling. No test-count inflation from reruns.
--11 native workflow checks PASS: pause clock, three real product buttons while paused with the same overview, four views, resume/bottle movement/capper animation, reset with identity retained, and actual old-inspector crop with zero explanation calls. Screenshot review checks readability separately from audit fields.
--1600×900 and1920×1080 actual native views inspected. Header, product/view controls and relevant station labels remain readable; the default presentation camera reserves header/footer space. Neighbouring signs can leave the frame during close-up; the selected station remains identifiable.
--Three fresh unscored poses × Lager/IPA/Stout: nine full-frame/neck-crop/ROI comparisons identical to original standalone, zero changed crop pixels. These are three fixture poses repeated under three visual identities, not nine independent accuracy samples. No held-out data, classifier evaluation or training used. Normal native inspector forwarding also checked, but not scored for accuracy.
--Two35s before and two final35s after render runs. Same scene/seed/clock, original comparison camera and viewport,1600×900,60 target,VSync0,4MSAA; first5s frames excluded. All runs packed44 at sim74.75s with zero rejects. Native mean59.994→59.987FPS; frame p9916.690→16.823ms. Short-run result, not a soak or general sizing claim.
+| Check group | Result / evidence |
+|---|---|
+| Original Python regression |18 PASS; reports/stage2/raw/python-tests.txt |
+| Focused inspector + launcher offline |17 +5 PASS; reports/stage2/raw/inspection-tests.txt; fake/offline only |
+| Original C# simulation |11 PASS; simulation-checks.json; seeded flow/conservation/earlier faults preserved |
+| Stage1 geometry/products |8 PASS; presentation-checks.json; output redirected to Stage2, old results retained |
+| New telemetry C# |15 PASS; telemetry-final-checks.json; typed19tags, units, actual counts/positions, JSON, timestamps, paused heartbeat/new session, missing/stale, controlled healthy-vs-restricted comparison, slowed upstream admissions, recovery and alarm retention |
+| Actual native workflow |20 checks PASS at1600×900 and20 PASS at1920×1080; native-1600.json/native-1920.json. Same repeated suite, not40distinct coverage checks |
+| Final display corrections |Final-camera-1600/1920.json and *-cleared.png: all modes, clean data-only background, readable fixed inspection boundary, tag association, blockage/recovery rechecks. Not an additional accuracy evaluation |
+| No inspector dependency |final-layout-1920.json: loopback inspection endpoint deliberately unavailable, line/modes remained live. Existing service was not stopped |
+| Preservation |159 baseline build/source/model/policy files hashed unchanged; inspector service PID41095 unchanged, captured/completed158 unchanged during QA, explanation calls0. preservation-check.json |
+| Short rendering |Two35s final runs per version, saved frame/resource distributions; PERFORMANCE.md. No inference benchmark or soak |
 
-## Failures and fixes retained
+Native workflow checks exercise real window buttons/keys and audited actual application state: mode selection, tag→machine, machine→tag, product identity without changing paused process time, four cameras, pause/resume/reset, progressive restriction/accumulation, observed upstream state, clear/recovery, stale withholding with frozen mechanisms while simulator moves, and missing filler Unknown. The controlled C# replay also verifies reduced admission count at the same process time against an unrestricted seeded line; a transient Waiting/Blocked label alone is not proof of an outfeed cause.
 
-First build failed on an int/long test-counter assignment; corrected type. The initial geometry Editor test emitted edit-mode Destroy errors; use DestroyImmediate only outside play mode. Initial signs were oversized; fitted glyph advances and reduced text. Initial close-ups put signs behind the HUD; default camera now reserves screen space. Initial pointer automation timed out, while a settled repeated real click succeeded; separate motion/button timing. A later initial pause check read an audit record persisted by the previous run; wait for fresh runtime audit before input. Failed logs/screenshots stay under reports/stage1/raw; none are relabelled as passes.
+Full workflow/sourcea8ead65; final display/sourcefbe388a, final provenance labels/source d516dd3. Adapter/mapping/physics unchanged during UI correction. Final C# check was strengthened to compare admissions, and rerun; rendering measured final native binaryd516dd3. Final screenshots reviewed at both resolutions. Panels can scroll, including the status list when the timeline is long. Tiny world signs are supplementary; readable status/tag panels and close-ups provide the evidence.
 
-A relative screenshot-path attempt did not produce the expected project file; subsequent evidence captures use absolute paths. No poor result was replaced with generated imagery. Baseline measurements, initial after checkpoints and final after measurements remain separate.
+## Retained defects and fixes
 
-## Evidence and limits
+First visual review showed a wrapped Speed caption and event timeline below tag-table scroll. Caption widened; timeline moved outside the scroll with flexible allocation. Generic packer→True timeline text replaced by explicit conventional accumulation message. Initial Data view disabled the only camera, leaving previous scene pixels at panel edges and a recent frame average near50ms. Existing camera now clears the full data background with scene culling0, retaining the UI cadence; final native screenshot shows16.7ms recent average. No extra camera, render-pipeline or graphics redesign. Initial images/measurement checkpoints/raw audit records remain local; only final source/screenshot copies published. Earlier failed experiments/results unchanged.
 
-reports/stage1/native-ui.json; desktop-1920.json; presentation-checks.json; simulation-checks.json; inspection-compatibility-final.json; performance-summary.json; before/after JSON/PNG; product/view/desktop PNGs. Exact commands, frames/resources/logs and failed attempts stay in reports/stage1/raw and runtime/stage1. Public delivery includes selected compressed copies of real screenshots and these documentation summaries, not raw runtime evidence.
+## Inspection limits
 
-Inspection separation retains the old cyan-cap/old-material camera scene with associated simulation IDs; it does not classify the new amber/product visual scene. Upgraded presentation pixels remain unvalidated for accuracy. Frozen model, policies, prompts and split/test records unchanged. No retraining, held-out reuse, budget reset or language-model inference. Streaming was not modified or revalidated; its earlier mobile-data issue remains unresolved. Customer visual acceptance pending.
+FocusedInspection.cs, BreweryPresentation.cs, frozen models/policies and accepted Stage1 executable hashes unchanged. No new captures/classifier requests/LLM calls; no evaluation dataset read for tuning, no retraining, no ledger reset. No new pixel equality or accuracy claim: the old cyan-cap configuration is preserved and disabled for this PLC profile, while current presentation pixels remain unvalidated. Stage1's previous nine fixture comparisons remain historical evidence for that stage only.
+
+This is a simulated adapter, not real PLC/transport validation. State semantics are calculated from current simulated activity/queues; a normal local queue can be Blocked without a fault. Snapshot state persists while simulation_paused is explicit. No historical network-loss transport, physical speed calibration, plant safety/production reliability, real-camera performance or other-host sizing proven. Stage2 user acceptance pending until Pietro tries it.
