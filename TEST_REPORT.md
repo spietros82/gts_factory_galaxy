@@ -1,30 +1,36 @@
-# Stage 2 acceptance evidence
+# Stage 3 verification
 
-Expected checks were written in ACCEPTANCE.md before evaluation. No physical equipment, AI inference, held-out inspection evaluation or request-budget reset.
+Protocol written before training/evaluation in PROTOCOL.md. Final1440crops:864train/288validation/288test,36/12/12complete groups,20groups perproduct. Two adjacent crops/class/group remain together; complete group/seed/appearance split before training. Initial1440development captures and24probe crops retained, total2904acquired≤3000; no additional weight downloads. Codex manually inspected36representative training images and probe sheets; not independent annotation. First opaque-glass/correlated fixture defects corrected before training, locked images never used for tuning. Final condition combinations vary independently across groups; narrow scene still permits synthetic shortcuts.
 
-| Check group | Result / evidence |
-|---|---|
-| Original Python regression |18 PASS; reports/stage2/raw/python-tests.txt |
-| Focused inspector + launcher offline |17 +5 PASS; reports/stage2/raw/inspection-tests.txt; fake/offline only |
-| Original C# simulation |11 PASS; simulation-checks.json; seeded flow/conservation/earlier faults preserved |
-| Stage1 geometry/products |8 PASS; presentation-checks.json; output redirected to Stage2, old results retained |
-| New telemetry C# |15 PASS; telemetry-final-checks.json; typed19tags, units, actual counts/positions, JSON, timestamps, paused heartbeat/new session, missing/stale, controlled healthy-vs-restricted comparison, slowed upstream admissions, recovery and alarm retention |
-| Actual native workflow |20 checks PASS at1600×900 and20 PASS at1920×1080; native-1600.json/native-1920.json. Same repeated suite, not40distinct coverage checks |
-| Final display corrections |Final-camera-1600/1920.json and *-cleared.png: all modes, clean data-only background, readable fixed inspection boundary, tag association, blockage/recovery rechecks. Not an additional accuracy evaluation |
-| No inspector dependency |final-layout-1920.json: loopback inspection endpoint deliberately unavailable, line/modes remained live. Existing service was not stopped |
-| Preservation |159 baseline build/source/model/policy files hashed unchanged; inspector service PID41095 unchanged, captured/completed158 unchanged during QA, explanation calls0. preservation-check.json |
-| Short rendering |Two35s final runs per version, saved frame/resource distributions; PERFORMANCE.md. No inference benchmark or soak |
+One MLP48 candidate per station, existing scikit-learn training;≈1s totalfit, within30min. Cap196/Fill200/Label130iterations. Fill convergence warning retained, no training retry. Validation-only threshold0.8allstations. Float32 safe NPZ weights, hashes in MODEL.md.72validation-crop device parity comparisons: identical CPU/GPU decisions, maximum score difference4.292e-6. AMD hardware GLrenderer/dispatch timer/result verified; model availability alone not used as proof.
 
-Native workflow checks exercise real window buttons/keys and audited actual application state: mode selection, tag→machine, machine→tag, product identity without changing paused process time, four cameras, pause/resume/reset, progressive restriction/accumulation, observed upstream state, clear/recovery, stale withholding with frozen mechanisms while simulator moves, and missing filler Unknown. The controlled C# replay also verifies reduced admission count at the same process time against an unrestricted seeded line; a transient Waiting/Blocked label alone is not proof of an outfeed cause.
+## Locked synthetic result (one run/device)
 
-Full workflow/sourcea8ead65; final display/sourcefbe388a, final provenance labels/source d516dd3. Adapter/mapping/physics unchanged during UI correction. Final C# check was strengthened to compare admissions, and rerun; rendering measured final native binaryd516dd3. Final screenshots reviewed at both resolutions. Panels can scroll, including the status list when the timeline is long. Tiny world signs are supplementary; readable status/tag panels and close-ups provide the evidence.
+Each device, each station:24samples/class, four classes,96samples/station. Matrix in class order protocol (healthy,defect1,defect2,uncertain):
 
-## Retained defects and fixes
+```
+24  0  0  0
+ 0 24  0  0
+ 0  0 24  0
+ 0  0  0 24
+```
 
-First visual review showed a wrapped Speed caption and event timeline below tag-table scroll. Caption widened; timeline moved outside the scroll with flexible allocation. Generic packer→True timeline text replaced by explicit conventional accumulation message. Initial Data view disabled the only camera, leaving previous scene pixels at panel edges and a recent frame average near50ms. Existing camera now clears the full data background with scene culling0, retaining the UI cadence; final native screenshot shows16.7ms recent average. No extra camera, render-pipeline or graphics redesign. Initial images/measurement checkpoints/raw audit records remain local; only final source/screenshot copies published. Earlier failed experiments/results unchanged.
+All three decidable classes observed precision/recall100%, decidable coverage100%;24/24poor-quality withheld/station,0misseddefects,0healthyfalse rejects. Capmissing→aligned0/24. Perproduct8samples/class/station/device, no observed product-specific errors. CPU/GPU both match the above; not repeated/pooled as extra independent testdata. Sample Wilson95%recall/precision86.20–100%; missingfalseaccept0–13.80%. Adjacent/group correlations make these optimistic as independent intervals. Zero observed error is not zero risk. Declared demo targets PASS; real-camera inspection remains unproven.
 
-## Inspection limits
+Offline13new schema/scope/fakefailure checks pass; original/focused/startup and native results are recorded in delivery closure after execution. Native UI expectations frozen separately NATIVE-ACCEPTANCE.md. Live development initially exposed uncentred fixed crops due interpolated bottle position; crop now computed from bottle-origin geometry, never hidden cap/label/fill state. Earlier uncertain results retained. This is acquisition correction, not model tuning or locked retest. CPU/GPU live/native observations are not automatically truth-scored as quality evaluation.
 
-FocusedInspection.cs, BreweryPresentation.cs, frozen models/policies and accepted Stage1 executable hashes unchanged. No new captures/classifier requests/LLM calls; no evaluation dataset read for tuning, no retraining, no ledger reset. No new pixel equality or accuracy claim: the old cyan-cap configuration is preserved and disabled for this PLC profile, while current presentation pixels remain unvalidated. Stage1's previous nine fixture comparisons remain historical evidence for that stage only.
+Qwen verification: at most3planned serial event-selected requests of the permitted6, no retries. Exact inputs/raw replies/provider timings and separate application guard/factual review recorded later. No automatic per-bottle Qwen. All older ledgers/models/datasets/builds preserved. Source-only GitHub projection excludes private/full history, raw logs/data, weights, builds, environments/caches. No service/remote access/streaming changes outside Stage3.
 
-This is a simulated adapter, not real PLC/transport validation. State semantics are calculated from current simulated activity/queues; a normal local queue can be Blocked without a fault. Snapshot state persists while simulation_paused is explicit. No historical network-loss transport, physical speed calibration, plant safety/production reliability, real-camera performance or other-host sizing proven. Stage2 user acceptance pending until Pietro tries it.
+## Delivery closure
+
+Original Python18 / preserved inspection-startup22 / C#11simulation+8presentation+15telemetry checks PASS, separate suites. Native25original assertions include one initial Machine data audit timing failure; correct screenshot and settled boundary assertion/four-view recheck passed. Seven defect/poor-quality fixtures, products, same-bottle identities, actual device batches, pause/reset/history and debug verified at1920×1080. No other supported presentation resolution claimed. Six bounded boundary checks PASS; own service outage kept native clock advancing and displayed unavailable/N/A. Native launch harness initially queried before window creation; bounded window wait added, failure retained. Review list contrast/wrapping and persistent defect retention corrected and inspected; thirteen offline tests include retention after healthy history/restart and ML-versus-mL guard regression.
+
+Qwen exact sequential replies preserved under reports/stage3/qwen: cap6.701s/live validationPASS/useful but unnecessary score framing; fill4.351s/live validationFAIL due application guard false positive on “ML decision”, raw content useful; label3.206s/live validationPASS but omitted misalignment and generic uncertainty. Guard false positive fixed without inference retry; offline saved reply validates, original failed record/fallback untouched. All three vision record snapshots unchanged. References exact on3/3, scope no unsupported physical property/cause claims found; usefulness PARTIAL. Guard is a conservative text/schema/reference check, not a semantic correctness guarantee. Operator scrutiny remains necessary. Report original live quality separately from offline guard replay.
+
+Model qwen3:8b, installed local Ollama, all3done_reason stop, thinkfalse/temp0/seed42/context8192/predict512. Ollama reported6,295,440,588bytes model placement and equal size_vram, recorded read-only; this is provider-reported placement, not independent GPU kernel attribution. First request load2.400s, later0.002s; machine waiting not operator time. No additional explanation calls; remaining verification ledger3/6. Full prompts/raw responses/provider durations/tokens retained, no hidden fault labels in those messages.
+
+Preservation2423/2423initial file hashes unchanged; frozenbackend/policy/protocol/lockedsplit hashes unchanged, two locked-device attempt markers retained. Images/models/builds/oldraw replies/ledgers preserved. Improvements compared to old RF are functionality (three brewery views, same-weight devices, evidence review), not a matched quality/hardware comparison.
+
+Final post-fix measured implementation1f4e52e:59.917–59.950FPS; all four enabled runs78steady inspections/60s,zero drops/stale/deadlines. Total native+replay+monitoring performance1020.058s (17.00min), below20min. Fresh GPU Debug screenshot confirms actual OpenGL device; old comparison checkpoint preserved separately.
+
+Language model metadata: qwen3:8b /8.2B/GGUF/Q4_K_M; exact tag, raw timing/token metadata and provider placement saved read-only.

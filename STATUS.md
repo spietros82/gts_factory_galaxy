@@ -1,41 +1,41 @@
-# Stage 2 — simulated PLC telemetry milestone
+# Stage 3 — three-station visual inspection
 
-Delivered a working native Machine data / Digital twin / Combined demonstration on the accepted brewery visuals.19typed tags expose the existing single process clock with source simulation timestamps, GUID sessions, quality and calculated-value labels. Station status and filling-head/capper/pusher mechanisms consume the contract through freshness/missing-value mapping. Continuous bottle geometry, fill and cap appearance remain directly simulator-driven; UI and SCHEMA.md state that boundary.
+Completed local implementation and bounded verification, 1920×1080 only. Pietro accepted Stages1/2; Stage3 operator acceptance remains pending. Source branch stage3-three-station-inspection. Implementation/measurement freeze1f4e52e; later commits contain documentation/publication evidence. Reviewed public history is projected separately from the full local history; stacked PR targets stage2-plc-telemetry. Neither earlier PR nor Stage3 is merged automatically.
 
-Start/clear outfeed blockage uses the existing slow-pack mechanism and spacing accumulation, with conventional threshold and concise simulated-time timeline. No invented simultaneous line stop. Clear restores cadence and recovery is verified; historical alarms retained until reset. Pause holds the source clock with explicit paused heartbeat; reset creates a new session. Missing/Stale states do not silently imply Running. F9/F10 development injections are opt-in only; normal review launch excludes them.
+## What is ready
 
-## Run and show
+One accepted brewery line; Lager/IPA/Stout; Machine data/Digital twin/Combined retained. New light provisional Braemac interface, Inspection, Failure review, Debug and labelled synthetic Examples. Three controlled rendered station views of the same simulator-associated bottle assess cap presence/alignment, visible liquid boundary and label presence/alignment. No physical volume, seal/torque/attachment, label readability or cause claim.
+
+Identical float32 MLP48 weights/preprocessing/policy execute on selected CPU NumPy or verified Radeon8060S OpenGL compute. Device switch applies between complete batches; no GPU-labelled CPU fallback. CPU handles image preprocessing, abstention, queues/storage/monitoring; Unity camera rendering uses GPU, readback/PNG CPU. Old CPU random forest and experimental Gemma remain separate preserved baselines, not another execution device of this model. New renderer/crops differ from that earlier cap-only dataset, so accuracy numbers are not a matched comparison.
+
+Bounded image queue, timestamps/IDs, actual image evidence/age, historical pause/reset handling, duplicate rejection, explicit unavailability and persistent event audit. Latest60 defect/uncertain events remain reviewable independently of healthy recent results, with protected crops within bounded image retention. Presenter examples change visible geometry only. No real PLC writes, AI control, repairs, additional lines or streaming changes.
+
+Manual local Qwen review uses recorded inspection fields and demo procedure S3-DEMO-1; cannot modify decisions. New persistent six-call ledger, three verification calls consumed, no retries. Language drafts and application fallback clearly differ. Qwen is optional; all inspections and factory operation remain usable without it.
+
+## Verification evidence
+
+- Final1440crops:864train/288validation/288test, complete36/12/12appearance groups,3products. First flawed development capture/probes preserved; total2904images≤3000. Training1.286s totalwall, within30minutes. Additional isolated downloads347,834bytes, within5GB; no system/driver changes.
+- Frozen held-out evaluation once/device:96images per station,24/class. Each CPU/GPU confusion matrix diagonal24/24; no observed missed defects/false rejects;100%decidable coverage;24/24poor-quality abstained/station. Each product8/class correct. Correlated synthetic samples, no real-camera proof;0/24critical false accepts has Wilson95%upper13.8%, not zero risk.
+- Thirteen new offline checks;18 original Python;22 preserved focused/startup;actual Unity Editor checks11simulation/8presentation/15telemetry, all PASS. Counts describe separate suites, not summed reruns.
+- Native initial25assertions:24PASS/1early navigation-audit failure retained. Settled Machine data check and focused four-view recheck PASS. All7visible defect/poor-image fixtures, same-bottle identities, all3products, CPU/GPU actual batches, pause/newsession/history, Debug, zero automatic Qwen calls checked. Six boundary assertions PASS: stale/missing/ambiguous withheld;duplicate/hiddentruth rejected. Own service outage left native clock advancing with unavailable/N/A display. No other services stopped.
+- Three exact Qwen replies:6.701s/4.351s/3.206s. Cap useful but discusses uncalibrated score; fill useful raw reply initially falsely rejected by ML-versus-mL guard bug, preserved fallback and failure. Bug fixed with offline regression/saved-reply replay only. Label reply generic and omitted recorded misalignment: material usefulness failure despite valid references. No claim that schema membership proves support. All3vision records unchanged.
+- Two warmed60s runs per disabled/CPU/GPU condition; same1920scene/product schedule/capture cadence. Original runs retained; post-fix comparison recorded separately. Bounded replay uses saved validation crops and reaches tested100batches/s ceiling without establishing saturation. Total measured budget remains below20minutes. See PERFORMANCE.md for final tables, source/configuration, inference/resource definitions and limits.
+
+## Launch and review
 
 ```bash
-./telemetry/start.sh
-./telemetry/stop.sh
-journalctl --user -u braemac-factory-stage2-player -f
+cd /home/braemac/GTS_factory_galaxy
+./stage3/start.sh
+./stage3/stop.sh
+journalctl --user -u braemac-factory-stage3-player -u braemac-factory-stage3-service -f
 ```
 
-Normal default Combined/Lager/healthy/1×/60target, native window; no web URL/new listener. Prior accepted Stage1: stop Stage2, then ./presentation/start.sh; its159-file preservation set and launch/build paths remain untouched. Project guidance and old reports/history preserved. Same installed Unity6000.6.5f1 release/Built-in, no packages, models, drivers or assets installed.
+Native window, no browser dashboard. Own service127.0.0.1:8820, two user units above; do not expose it publicly. Earlier launchers ./telemetry/start.sh, ./presentation/start.sh and ./inspection/start.sh unchanged. Demo script DEMO.md; architecture ARCHITECTURE.md; dependency/model reproduction README.md / DEPENDENCIES.md / MODEL.md. Screenshots are actual native captures; local full-resolution originals reports/stage3/gui, reviewed reduced copies stage3/screenshots. No generated mockups.
 
-Five minutes: Machine data (select packer/read tags) → Digital twin (follow same stations) → Combined (click machine/tag) → Start blockage (observe gradual accumulation/upstream waiting) → Clear blockage (observe flow recovery) → pause/reset/new session. 1/2/3 modes; B/C/R scenario; Space pause; F5–F8 views; Lager/IPA/Stout visual identity only. Tables/status panels scroll where needed. DEMO.md contains the presenter wording.
+## Limits and stopping point
 
-## Verification and performance
+Synthetic controlled isolated cameras and simulator-assisted identities; no real-camera localisation/occlusion/tracking reliability. Small scene-conditioned model, uncalibrated scores, appearance shortcuts possible. Difficult examples do not cover every unknown distribution. Physical pilot requires controlled optics/light, production speeds/spacing, independently labelled real images and unseen product variation. No industrial approval, production security, recovery guarantee, NPU/Qualcomm integration, hardware-sizing proof or time-saving claim. GPU utilisation is whole-device and includes background work; no invented task shares. CPU can be sufficient, GPU advantage must not be assumed.
 
-18original Python,17focused and5startup offline checks pass.11C# process,8Stage1 geometry and15new telemetry checks pass.20actual native checks per desktop resolution1600×900 and1920×1080; repeated suites are not added as distinct coverage. Final display/camera rechecks preserve their checkpoints. Inspector endpoint unavailable test confirms the workflow has no AI dependency. Shared inspector PID41095/captured158/completed158/explanation0 preserved;159 hashed original build/source/model/policy files unchanged.
+Source package excludes weights/datasets/runtime/binaries/secrets/caches; locally reproduced model/build dependencies required. No separate host tested. No further training, locked retest, language retry, streaming work or follow-on scope. Stage3 ready for operator review after final launcher health check; acceptance pending until Pietro tries it.
 
-Final measured native sourced516dd3: two35s runs per version, five warm-up seconds excluded, same1600×900/original fixed overview/full viewport/60target/VSync0/4MSAA/seed42/healthy1×. Stage1→Stage2 meanFPS59.968→59.991; meanframe16.676→16.669ms; p9916.954→16.695ms. Sampled peakRSS330.4→347.6MB; nativeCPU55.4→65.7% (one-core100%); whole-device GPU7.38→9.05%. Small timing difference is not a performance improvement claim. Metrics include host/background activity; no exact GPU shares or overlapping memory sums. Not a soak or sizing benchmark.
-
-Actual screenshots: telemetry/screenshots/{data,twin,combined,blockage,recovery,data-1920,twin-1920,combined-1920}.jpg, reduced unretouched copies. Full PNGs, raw logs/resources/audits and results retained in reports/stage2. Source schema/diagram: SCHEMA.md; results: VERIFICATION.md / PERFORMANCE.md. No new external assets; Stage1 procedural asset provenance remains presentation/ASSETS.md.
-
-## Delivery and limitations
-
-Local full history stays separate from reviewed public history. Stage2 branch stage2-plc-telemetry is a clean source projection parented on accepted public Stage187869ee. Its review PR targets stage1-brewery-presentation (stacked on unmerged PR1); neither PR merged, repository remains public. Private configurations/history, logs/data, weights, builds, Unity cache and environments excluded. Final delivery commit/PR recorded in GITHUB-DELIVERY.md.
-
-No real PLC, OPC UA/MQTT, AI analysis, camera inspection/inference, additional line/camera, streaming work or new operating procedure. Frozen old cyan-cap configuration remains distinct from unvalidated brewery pixels. Simulated unit/state definitions are not physical commissioning evidence. A future real adapter needs independent transport, timing, units, tracking and safety review. Stale contract-driven mechanisms hold while simulator-driven bottles can keep moving, intentionally labelled. The UI displays the latest three timeline events from a bounded32-event session list. No production reliability, cross-hardware performance or independent inspection accuracy claim.
-
-Stage2 implementation complete, operator acceptance pending. Stop at this milestone; no automatic next stage.
-
-
-Stage2 GitHub closure: PR2 https://github.com/spietros82/gts_factory_galaxy/pull/2 open/unmerged, stacked on Stage1. Reviewed public code9326825, local native d516dd3;163paths verified before documentation-only closure, zero byte/path mismatches. Normal review unit active at1600x900/Combined/Lager/healthy1x, QA flags removed. Prior build/inspection counters preserved. Operator acceptance pending; work stopped at Stage2. See telemetry/GITHUB-DELIVERY.md.
-
-
-## Stage 2 viewport correction
-
-Repaint opaque camera margins to remove old panel text/buttons after mode changes. Native checks at1600×900 and1920×1080 pass; preserved source/build/inspection counters unchanged, no model calls. See telemetry/DISPLAY-FIX.md for screenshots, retained automation failures and limits.
+Final measured outcome:59.917–59.950FPS; CPUcapture-to-result mean13.571–13.987ms, GPU16.493–16.546ms (see exact PERFORMANCE.md table);78steady inspections/60s/run,zero drops/stale/deadlines. Total performance1020.058s. Final unit/PR/package closure recorded below.

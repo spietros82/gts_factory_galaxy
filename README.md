@@ -1,27 +1,33 @@
-# Stage 2 — machine data to brewery digital twin
+# Stage 3 — three-station brewery inspection
 
-Native Unity6000.6.5f1 Linux release / Built-in / OpenGLCore, one synthetic brewery line. No AI, physical PLC or Python/model service is required for the data/3D workflow. Existing inspector configuration is preserved; PLC profile prevents capture and inference. The inherited inspector may read loopback status if available; its absence does not drive any Stage2 finding or animation.
-
-## Launch / stop
-
-From the project:
+Native Unity6000.6.5f1 Linux/Built-in/OpenGLCore, sole supported presentation1920×1080. One synthetic line, three image-based assessments of the same simulator-associated bottle. Provisional light Braemac theme, fictional beer identities; exact corporate logo/colour approval not available. Earlier brewery geometry, telemetry contract/mapped mechanisms, product controls and accepted builds retained. Stage3-only transparent-glass shader makes visible liquid boundary inspectable; old inspection configuration/build remains frozen.
 
 ```bash
-./telemetry/start.sh
-./telemetry/stop.sh
-journalctl --user -u braemac-factory-stage2-player -f
+cd /home/braemac/GTS_factory_galaxy
+./stage3/start.sh
+./stage3/stop.sh
+journalctl --user -u braemac-factory-stage3-player -u braemac-factory-stage3-service -f
 ```
 
-Stop Stage2 before changing dimensions:
-`STAGE2_WIDTH=1920 STAGE2_HEIGHT=1080 ./telemetry/start.sh`.
-Native window, no dashboard URL or new listener. Entry point builds/stage2/FactoryGalaxy.x86_64; its user unit starts only this player, does not manage inspection/Ollama/other applications. Launch is idempotent and ownership-checked. `./telemetry/build.sh` uses the already-installed licensed Editor and writes Stage2 builds only. Set UNITY_EDITOR for another compatible licensed path. No driver/package/model install.
+Native window; no dashboard URL. Own loopback service127.0.0.1:8820. Start reuses own active units, checks ownership/port/readiness; no port-owner kill. Config example→excluded local configuration, endpoint/model/data paths configurable.1920×1080 always; crops stay160×160 and neural features24×24. Source camera configuration stage3/cameras.json / packaged StreamingAssets/stage3-cameras.json; override --stage3-camera-config. Renderer camera isolation/localisation is simulator-assisted, not independent real tracking.
 
-Normal default is Combined / Lager / healthy seed42 /1× / target60FPS. 1/2/3 choose Machine data / Digital twin / Combined; F5/Home overview, F6 filler, F7 capper, F8 inspection. LAGER/IPA/STOUT change identity only. Space pause, R reset(new session), B start outfeed blockage, C clear. Top buttons expose those actions. Right-drag orbit, scroll zoom, machine clicking retained; clicking a tag focuses its machine. Tables scroll; the event timeline is separate. F12 records a native screenshot in the runtime directory. No AI controls or automatic inference.
+Top navigation Machine data / Digital twin / Combined preserves Stage2 concepts.1/2/3 shortcuts; F5–F8 camera views; Space pause/Rreset/Boutfeed/Cclear. Inspection shows three actual crops and selected/actual backend. Examples offers labelled presenter-only synthetic visible defects; these alter bottle appearance, not PLC readings or diagnosed causes. Failure review lists detected defects and uncertain events separately by result wording; select evidence to see image, exact IDs/times/score/timings. Explain this event is a manual local Qwen action. Debug shows bounded measured counters and limitations. No automatic inference explanations or repairs.
 
-Prior accepted version remains runnable: `./telemetry/stop.sh`, then `./presentation/start.sh`; stop it with `./presentation/stop.sh`. Original Stage1 binary/launcher untouched; source baseline45f3500 / public87869ee. Avoid running both render windows simultaneously for a customer walkthrough. Earlier inspector/streaming projects remain preserved.
+Pause marks imagery historical. Reset makes a new process/inspection session while retaining event audit. Stale/missing/poor-quality evidence cannot be a current pass. Switching CPU/GPU applies between complete shared-bottle batches. GPU unavailable is explicit; no silent device fallback. Qwen unavailable/invalid uses labelled application factual fallback; raw reply preserved, vision result immutable. Persistent new six-request Stage3 verification ledger does not reset on player/service restart.
 
-## Scope and honest limits
+## Reproduce excluded data/models locally
 
-All data is synthetic; calculations are explicitly tagged. Station mechanisms/status consume the telemetry contract. Continuous bottle path, fill appearance and cap attachment still follow the original simulator directly. Outfeed blockage is the original slow-pack scenario, not an immediate full stop. Queue spacing gives delayed upstream response; clearing restores cadence. Alarm history remains historical. Pause is explicitly different from fault. Stale/missing tags become Stale/Unknown and withhold mechanism updates.
+Existing .venv supplies pinned NumPy/Pillow/scikit-learn/SciPy; stage3/.venv adds pinned ModernGL5.12.0/glcontext3.0.0 without modifying it. DEPENDENCIES.md explains this reuse and wheel hashes/licences. On another compatible host create an isolated environment with recorded requirements; compatibility/performance elsewhere is unverified. Do not alter drivers for this demo.
 
-No inspection models/budgets/held-out sets changed or inference called. The old cyan-cap capture configuration remains distinct from the unvalidated new brewery materials. This stage adds no cameras, lines, transports or streaming work. User acceptance pending until Pietro reviews Stage2. See SCHEMA.md, DEMO.md, VERIFICATION.md, PERFORMANCE.md and STAGE2.md.
+1. Read PROTOCOL.md. Run `stage3/.venv/bin/python -m stage3.prepare` (new output only).
+2. Build with `./stage3/build.sh` using existing licensed Unity6000.6.5f1/Linux support. This writes builds/stage3 only; stop Stage3 first.
+3. Run the built player with `--presentation true --plc-demo true --stage3 true --stage3-dataset "$PWD/stage3/dataset" --data-path "$PWD/runtime/stage3-dataset" -screen-width 1920 -screen-height 1080` (pass width/height as separate options/values). Dataset capture exits after1440 images. Keep source images/manifest locally, never commit them.
+4. `stage3/.venv/bin/python -m stage3.finalize_data`; inspect development review sheets, never use locked images for tuning.
+5. `OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 stage3/.venv/bin/python -m stage3.train`. Frozen policy records model SHA256. Weight artifacts safe NPZ, no untrusted pickles.
+6. Runtime needs local stage3/models/{cap,fill,label}.npz and policy.json. GitHub excludes datasets/weights/binaries. `evaluate` refuses an already-attempted locked device; do not remove markers or rerun held-out tests to hide errors. Reproduction is a fresh deployment, not permission for another evaluation on this host.
+
+Prior Stage2: ./telemetry/start.sh / stop.sh; Stage1: ./presentation/start.sh / stop.sh. Old focused ./inspection/start.sh preserved. Avoid concurrent demo render windows unless explicitly measuring concurrency. Stage3 scripts never stop those services or modify Ollama/WebUI/remote access/streaming.
+
+Scope: synthetic visual categories, not physical volume, mechanical attachment/torque/seal, label readability or causal diagnosis. No independent industrial validation, safety-control integration, production security or cross-hardware sizing proof. Stop after Stage3; operator acceptance pending.
+
+Verification summary: MILESTONE-3.md and VERIFICATION.md. Final machine comparisons PERFORMANCE.md; metric definitions METRICS.md. Three verification language calls consumed; no automatic background explanations. Previous raw errors retained. Stage3 user acceptance pending.

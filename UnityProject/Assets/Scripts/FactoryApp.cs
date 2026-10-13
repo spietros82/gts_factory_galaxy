@@ -9,7 +9,7 @@ namespace Braemac.Factory {
   public LineSimulation Sim {get;private set;} public string Selected="line";public int Profile=1;
   PlcPresentation plc;
   FactoryGeometry geometry;BreweryPresentation brewery;Camera main;float accumulator,speed=1,yaw=10,pitch=30,distance=28;Vector3 target=Vector3.zero;
-  bool scenePointerDown;bool paused,technical,showProcedures,measurement,computeTechnical;int tab;Vector2 sidebarScroll;EdgeClient edge;FocusedInspection focused;double started;string screenshotPath="";float quitAfter;bool screenshotSaved;
+  bool scenePointerDown;bool paused,technical,showProcedures,measurement,computeTechnical;int tab;Vector2 sidebarScroll;EdgeClient edge;FocusedInspection focused;double started;DateTime startedUtc;string screenshotPath="";float quitAfter;bool screenshotSaved;
   float presentationAuditAt;
   [Serializable] public class PresentationAudit {public string product,view;public bool paused;public double sim_time;public int packed,produced,bottles;public float first_bottle_x,capper_angle,head_y;public int first_bottle_id;}
   List<float> frames=new List<float>();List<double> frameWall=new List<double>();List<double> tickTimes=new List<double>();
@@ -24,6 +24,9 @@ namespace Braemac.Factory {
   public string PresentationProduct{get{return brewery==null?"LEGACY":brewery.Product;}}
   public FactoryGeometry Geometry{get{return geometry;}}
   public Camera MainCamera{get{return main;}}
+  public BreweryPresentation Brewery{get{return brewery;}}
+  public PlcPresentation Plc{get{return plc;}}
+  ThreeStationInspection stage3;
   public string DataPath{get{return dataPath;}}
   public static string Argument(string key,string fallback=""){var a=Environment.GetCommandLineArgs();for(int i=0;i<a.Length-1;i++)if(a[i]==key)return a[i+1];return fallback;}
   void Awake(){
@@ -48,7 +51,8 @@ namespace Braemac.Factory {
    if(Argument("--focused-inspection","false")=="true"){focused=gameObject.AddComponent<FocusedInspection>();edge=gameObject.AddComponent<EdgeClient>();edge.enabled=false;}else edge=gameObject.AddComponent<EdgeClient>();
    if(Argument("--comparison-camera","false")=="true"){target=Vector3.zero;distance=28;yaw=10;pitch=30;}
    if(Argument("--plc-demo","false")=="true"){Profile=1;ExplanationsDisabled=true;plc=new PlcPresentation(this);}
-   started=Time.realtimeSinceStartupAsDouble;
+   if(Argument("--stage3","false")=="true"){brewery.EnableStage3();edge.enabled=false;stage3=gameObject.AddComponent<ThreeStationInspection>();}
+   started=Time.realtimeSinceStartupAsDouble;startedUtc=DateTime.UtcNow;
    if(Argument("--stream-path")!="")gameObject.AddComponent<StreamBridge>();
   }
   void Update(){
@@ -63,6 +67,7 @@ namespace Braemac.Factory {
    if(!measurement&&Input.GetKeyDown(KeyCode.Home))Overview();
    if(PresentationEnabled&&!measurement){if(Input.GetKeyDown(KeyCode.F5))Overview();if(Input.GetKeyDown(KeyCode.F6))SelectPresentationView("filler");if(Input.GetKeyDown(KeyCode.F7))SelectPresentationView("capper");if(Input.GetKeyDown(KeyCode.F8))SelectPresentationView("inspection");}
    float uiScale=Mathf.Max(.7f,Screen.width/1600f);bool ui=plc!=null?(plc.Mode=="data"||Input.mousePosition.y>Screen.height-240*uiScale||Input.mousePosition.y<65*uiScale||Input.mousePosition.x>Screen.width*(plc.Mode=="combined"?.63f:.77f)):Input.mousePosition.y>Screen.height-(PresentationEnabled?175:150)*uiScale||Input.mousePosition.x>Screen.width-365*uiScale;
+   if(stage3!=null)ui=main.cullingMask==0||!main.pixelRect.Contains(Input.mousePosition);
    if(Input.GetMouseButtonDown(0))scenePointerDown=!ui;
    if(!measurement&&!ui){distance=Mathf.Clamp(distance-Input.mouseScrollDelta.y*1.3f,7,42);
     if(Input.GetMouseButton(1)){yaw+=Input.GetAxis("Mouse X")*3;pitch=Mathf.Clamp(pitch-Input.GetAxis("Mouse Y")*2,20,70);}
@@ -78,7 +83,7 @@ namespace Braemac.Factory {
   string StationSummary(){switch(Selected){case "infeed":return "Empty amber bottles enter from the left and move towards the filler.";case "filler":return "Four filling heads dispense the simulated 500 mL beer. Watch the contents rise while the heads cycle.";case "capper":return "A rotating turret applies caps after filling. Cap animation follows the existing simulation.";case "inspection":return "Bottles pass the cap inspection station. Entry / Evidence uses the preserved legacy inspection image, not the decorated brewery view.";case "packer":return "Finished bottles accumulate in the finite buffer and leave through packing. The existing outfeed fault restricts this stage.";default:return "One brewery bottling line: empty bottles → filling → capping → inspection → packing. Right-drag to orbit; scroll to zoom.";}}
   public bool SelectProduct(string product){return brewery!=null&&brewery.SetProduct(product);}
   public void SelectPresentationView(string asset){if(asset=="overview"){Overview();return;}float x=asset=="filler"?-7:asset=="capper"?-2:asset=="inspection"?3:0;if(asset!="filler"&&asset!="capper"&&asset!="inspection")return;Selected=asset;target=new Vector3(x,1.45f,0);distance=asset=="filler"?9:7.5f;yaw=-12;pitch=24;}
-  public void ResetLine(){Sim=new LineSimulation(42);for(int pre=0;pre<800;pre++)Sim.Step();accumulator=0;paused=false;if(focused!=null)focused.NewSession();if(plc!=null)plc.Reset();}
+  public void ResetLine(){Sim=new LineSimulation(42);for(int pre=0;pre<800;pre++)Sim.Step();accumulator=0;paused=false;if(focused!=null)focused.NewSession();if(plc!=null)plc.Reset();if(stage3!=null)stage3.NewSession();}
   // Semantic, application-only input. Never inject desktop keys or OS commands.
   public string RemoteAction(string action,string value){
    if(measurement)return "rejected: measurement controls held";
@@ -105,6 +110,7 @@ namespace Braemac.Factory {
    small=new GUIStyle(text){fontSize=12};button=new GUIStyle(GUI.skin.button){fontSize=14,fixedHeight=32};toggle=new GUIStyle(GUI.skin.toggle){fontSize=13,wordWrap=true};
   }
   public void OnGUI(){
+   if(stage3!=null){stage3.Draw();return;}
    if(plc!=null){plc.Draw();return;}
    Styles();float scale=Mathf.Max(.7f,Screen.width/1600f);GUI.matrix=Matrix4x4.Scale(new Vector3(scale,scale,1));float w=Screen.width/scale,h=Screen.height/scale;
    GUI.DrawTexture(new Rect(18,18,w-36,PresentationEnabled?145:112),panel);GUILayout.BeginArea(new Rect(34,25,w-68,PresentationEnabled?133:100));
@@ -198,7 +204,7 @@ namespace Braemac.Factory {
    string stamp=DateTime.UtcNow.ToString("yyyyMMddTHHmmssZ");
    File.WriteAllLines(Path.Combine(dataPath,"frames-"+stamp+".csv"),FrameLines());
    File.WriteAllLines(Path.Combine(dataPath,"telemetry-"+stamp+".csv"),TickLines());
-   File.WriteAllText(Path.Combine(dataPath,"run-"+stamp+".json"),"{\"unity\":\""+Application.unityVersion+"\",\"graphics\":\""+SystemInfo.graphicsDeviceName+"\",\"api\":\""+SystemInfo.graphicsDeviceType+"\",\"width\":"+Screen.width+",\"height\":"+Screen.height+",\"vsync\":0,\"frame_cap\":"+Application.targetFrameRate+",\"profile\":"+Profile+",\"wall_seconds\":"+(Time.realtimeSinceStartupAsDouble-started).ToString("0.000",System.Globalization.CultureInfo.InvariantCulture)+",\"sim_time\":"+Sim.Time.ToString("0.000",System.Globalization.CultureInfo.InvariantCulture)+",\"packed\":"+Sim.Packed+",\"rejected\":"+Sim.Rejected+",\"process_rss_bytes\":"+Process.GetCurrentProcess().WorkingSet64+"}");
+   File.WriteAllText(Path.Combine(dataPath,"run-"+stamp+".json"),"{\"started_utc\":\""+startedUtc.ToString("o")+"\",\"unity\":\""+Application.unityVersion+"\",\"graphics\":\""+SystemInfo.graphicsDeviceName+"\",\"api\":\""+SystemInfo.graphicsDeviceType+"\",\"width\":"+Screen.width+",\"height\":"+Screen.height+",\"vsync\":0,\"frame_cap\":"+Application.targetFrameRate+",\"profile\":"+Profile+",\"wall_seconds\":"+(Time.realtimeSinceStartupAsDouble-started).ToString("0.000",System.Globalization.CultureInfo.InvariantCulture)+",\"sim_time\":"+Sim.Time.ToString("0.000",System.Globalization.CultureInfo.InvariantCulture)+",\"packed\":"+Sim.Packed+",\"rejected\":"+Sim.Rejected+",\"process_rss_bytes\":"+Process.GetCurrentProcess().WorkingSet64+"}");
   }
   IEnumerable<string> FrameLines(){yield return "frame,wall_seconds,wall_frame_interval_ms";for(int i=0;i<frames.Count;i++)yield return i+","+frameWall[i].ToString("F6",System.Globalization.CultureInfo.InvariantCulture)+","+frames[i].ToString("F6",System.Globalization.CultureInfo.InvariantCulture);}
   IEnumerable<string> TickLines(){yield return "tick,processing_ms";for(int i=0;i<tickTimes.Count;i++)yield return i+","+tickTimes[i].ToString("F6",System.Globalization.CultureInfo.InvariantCulture);}

@@ -10,6 +10,9 @@ namespace Braemac.Factory {
   public readonly GameObject Root;
   readonly FactoryGeometry original;
   readonly Dictionary<int,BottleVisual> bottles=new Dictionary<int,BottleVisual>();
+  public bool Stage3Appearance;
+  public void EnableStage3(){Stage3Appearance=true;glass.shader=Shader.Find("Braemac/Stage3Glass");glass.color=new Color(.34f,.17f,.05f,.20f);}
+  public BottleVisual BottleById(int id){BottleVisual value;return bottles.TryGetValue(id,out value)?value:null;}
   readonly Dictionary<string,Transform> machinery=new Dictionary<string,Transform>();
   readonly List<Transform> billboards=new List<Transform>();
   readonly List<TextMesh> productSigns=new List<TextMesh>();
@@ -131,7 +134,7 @@ namespace Braemac.Factory {
   }
   public void Update(LineSimulation sim,Camera camera){var alive=new HashSet<int>();foreach(var b in sim.Bottles){alive.Add(b.Id);if(!bottles.ContainsKey(b.Id))bottles[b.Id]=Bottle(b.Id);var styled=bottles[b.Id];BottleVisual old;if(!original.Products.TryGetValue(b.Id,out old))continue;
     styled.Root.transform.position=old.Root.transform.position;styled.Root.transform.rotation=old.Root.transform.rotation;styled.Cap.SetActive(old.Cap.activeSelf);styled.Cap.transform.localPosition=old.Cap.transform.localPosition;styled.Cap.transform.localRotation=old.Cap.transform.localRotation;
-    float fraction=b.Stage==0?0:b.Stage==1?Mathf.Clamp01(b.Dwell/.7f):Mathf.Clamp01(b.Fill/500f);styled.Fluid.SetActive(fraction>.01f);float height=.43f*fraction;styled.Fluid.transform.localScale=new Vector3(.305f,height/2,.305f);styled.Fluid.transform.localPosition=new Vector3(0,.04f+height/2,0);
+    float fraction=b.Stage==0?0:b.Stage==1?Mathf.Clamp01(b.Dwell/.7f):Stage3Appearance?Mathf.Clamp(b.Fill/500f,0,1.25f):Mathf.Clamp01(b.Fill/500f);styled.Fluid.SetActive(fraction>.01f);float height=.43f*fraction;styled.Fluid.transform.localScale=new Vector3(.305f,height/2,.305f);styled.Fluid.transform.localPosition=new Vector3(0,.04f+height/2,0);
    }
    foreach(int id in new List<int>(bottles.Keys))if(!alive.Contains(id)){Dispose(bottles[id].Root);bottles.Remove(id);}
    foreach(var pair in machinery){pair.Value.localPosition=original.Moving[pair.Key].localPosition;pair.Value.localRotation=original.Moving[pair.Key].localRotation;}
