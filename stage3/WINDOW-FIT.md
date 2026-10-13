@@ -1,0 +1,9 @@
+# Stage3 window-size correction — 2026-10-13
+
+Pietro reported the application window itself was still too large. The previous compact-panel revision retained a1920×1080 client, exceeding this1920×1080 desktop once the37px title bar and desktop work area were included. Read-only X11 work-area measurement:1854×1048 at(66,32). Normal Stage3 launch now defaults1600×900. The Stage3 build enables window resizing; earlier build settings/launchers are preserved. GUI scales with the window. Inspection capture256×256, crop160×160 and neural inputs24×24 are unchanged.
+
+Start `./stage3/start.sh`, stop `./stage3/stop.sh`. Resize by dragging the window border. Explicit historical benchmark-size launch: `STAGE3_WIDTH=1920 STAGE3_HEIGHT=1080 ./stage3/start.sh` after stopping. This is a size option, not another measured run. Previous compact1080p binary retained in builds/stage3-compact-1080p; original layout remains in builds/stage3-original-layout. Both are local and excluded from Git/package.
+
+No model/threshold/training/data changes, no Qwen request or new benchmark cycle. Actual window/readability/crop/resize checks recorded in reports/stage3/window-fit. Acceptance pending until Pietro tries the new size.
+
+Verified native startup1600×900 and programmatic resize1440×810. The window fits the desktop work area. Pietro then resized the running window further and reported: “I’m seeing the first results and it’s so much better now.” Operator-resized native screenshot retained. An initial screenshot lookup selected a stale1080p image; that artifact is explicitly labelled not window-size evidence. A later1600-size assertion failed because the operator had resized the window to1504×843; no further resize was imposed. Build and14offline safety checks pass. Qwen ledger remains3/6; inspection inputs/camera configuration unchanged. Positive layout feedback recorded, not real-camera reliability approval.

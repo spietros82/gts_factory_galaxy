@@ -1,0 +1,1 @@
+{"host":"127.0.0.1","port":8820,"model_path":"stage3/models","data_path":"runtime/stage3-service","device":"cpu","queue_capacity":2,"max_age_seconds":2,"ollama_endpoint":"http://127.0.0.1:11434","assistant_model":"qwen3:8b","assistant_timeout_seconds":120,"explanation_budget":6,"monitoring":true}

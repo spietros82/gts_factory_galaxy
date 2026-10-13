@@ -1,0 +1,1 @@
+{"version":"gts.station-cameras/1","line_id":"Line01","trigger_x":3.0,"frame_width":256,"frame_height":256,"crop_width":160,"crop_height":160,"stations":[{"station_id":"cap","center_y":0.75,"orthographic_size":0.17},{"station_id":"fill","center_y":0.45,"orthographic_size":0.17},{"station_id":"label","center_y":0.27,"orthographic_size":0.24}]}

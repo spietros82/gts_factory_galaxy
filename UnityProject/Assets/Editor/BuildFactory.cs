@@ -19,8 +19,12 @@ public static class BuildFactory {
   PlayerSettings.defaultScreenWidth=1600;PlayerSettings.defaultScreenHeight=900;PlayerSettings.fullScreenMode=FullScreenMode.Windowed;
   PlayerSettings.runInBackground=true;PlayerSettings.SetScriptingBackend(UnityEditor.Build.NamedBuildTarget.Standalone,ScriptingImplementation.Mono2x);
   Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(output)));
+  bool previousResize=PlayerSettings.resizableWindow;
+  try {
+  for(int i=0;i<args.Length-1;i++)if(args[i]=="--resizable-window")PlayerSettings.resizableWindow=args[i+1]=="true";
   var result=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=new[]{"Assets/Scenes/Factory.unity"},locationPathName=output,target=BuildTarget.StandaloneLinux64,options=BuildOptions.None});
   Debug.Log("FACTORY_BUILD "+result.summary.result+" bytes "+result.summary.totalSize);
   if(result.summary.result!=BuildResult.Succeeded)throw new Exception("Linux standalone build failed");
+  } finally {PlayerSettings.resizableWindow=previousResize;AssetDatabase.SaveAssets();}
  }
 }
