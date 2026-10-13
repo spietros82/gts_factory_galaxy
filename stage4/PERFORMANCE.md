@@ -35,7 +35,7 @@ Trigger→result includes the pre-capture scheduling wait; capture→result alon
 
 At three lines, configured benchmark demand 1 batch/line/s (9 images/s aggregate) was the **first tested rate**. CPU offered/accepted/completed 8.8 images/s; GPU 8.6 images/s in the 15-second measurement window. Whole-phase native drops: CPU 3 images/one bottle batch; GPU 6 images/two batches. Backend accepted all actually submitted images. Inspection/rendering latencies remained short, but the predeclared zero-drop requirement failed. The sweep stopped; 2/4/8 rates were not run.
 
-Native code drops associations if the selected simulated bottle disappears before camera service. The posed-target benchmark picked an exiting target; this is consistent with the observed missing-target drops, rather than inference saturation. Raw counters and failure retained; not tuned and rerun. Presenter benchmark cadence is experimental and not recommended as the normal demonstration mode. Increasing simulation speed is not an acquisition-rate benchmark.
+Native code rejects expired or disappeared target associations. Low measured camera waits and no backend rejections point to target lifetime/association as the likely source. The frozen run did not retain a per-drop reason/target trace, so the exact dropped transition remains unconfirmed; this is not evidence of inference saturation. Raw counters and failure retained; not tuned and rerun. Presenter benchmark cadence is experimental and not recommended as the normal demonstration mode. Increasing simulation speed is not an acquisition-rate benchmark.
 
 ## Vision-only replay ceiling, not camera capacity
 
@@ -72,5 +72,7 @@ Local immutable evidence: `reports/stage4/capacity/` contains freeze, background
 - [Capture latency](charts/latency.svg) and [trigger latency](charts/trigger-latency.svg)
 - [Completed images](charts/throughput.svg)
 - [Host CPU](charts/host-cpu.svg), [whole-device GPU](charts/gpu.svg), [native RSS](charts/memory.svg)
+
+Red outlines in charts mark failure of the overall phase criteria, usually frame timing; they do not mean every plotted metric failed. Lines connect tested counts for readability, not measured intermediate counts.
 
 Runs are bounded synthetic demonstrations, not industrial capacity, real-camera accuracy, continuous production reliability or evidence that an A395 is required instead of a cheaper machine. Untested counts, real optics/lighting/triggers/speeds, production data transport/storage and sustained runs remain unproven.
