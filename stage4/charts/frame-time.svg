@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="470" viewBox="0 0 940 470">
+<rect width="100%" height="100%" fill="white"/>
+<text x="24" y="32" font-family="sans-serif" font-size="21" fill="#142838">Complete factory versus rendering-only</text>
+<path d="M88,398.0H910" stroke="#e4e9ec"/>
+<text x="76" y="403.0" text-anchor="end" font-family="sans-serif" font-size="13">0.0</text>
+<path d="M88,332.0H910" stroke="#e4e9ec"/>
+<text x="76" y="337.0" text-anchor="end" font-family="sans-serif" font-size="13">8.3</text>
+<path d="M88,266.0H910" stroke="#e4e9ec"/>
+<text x="76" y="271.0" text-anchor="end" font-family="sans-serif" font-size="13">16.6</text>
+<path d="M88,199.99999999999997H910" stroke="#e4e9ec"/>
+<text x="76" y="204.99999999999997" text-anchor="end" font-family="sans-serif" font-size="13">24.9</text>
+<path d="M88,134.0H910" stroke="#e4e9ec"/>
+<text x="76" y="139.0" text-anchor="end" font-family="sans-serif" font-size="13">33.2</text>
+<path d="M88,68.0H910" stroke="#e4e9ec"/>
+<text x="76" y="73.0" text-anchor="end" font-family="sans-serif" font-size="13">41.5</text>
+<text x="88.0" y="423" text-anchor="middle" font-family="sans-serif" font-size="14">1</text>
+<text x="321.276262002576" y="423" text-anchor="middle" font-family="sans-serif" font-size="14">3</text>
+<text x="468.457196501932" y="423" text-anchor="middle" font-family="sans-serif" font-size="14">6</text>
+<text x="615.638131001288" y="423" text-anchor="middle" font-family="sans-serif" font-size="14">12</text>
+<text x="762.819065500644" y="423" text-anchor="middle" font-family="sans-serif" font-size="14">24</text>
+<text x="910.0" y="423" text-anchor="middle" font-family="sans-serif" font-size="14">48</text>
+<path d="M88,238.9551386135609H910" stroke="#ad4242" stroke-dasharray="6 4"/>
+<text x="95" y="232.9551386135609" font-family="sans-serif" font-size="12" fill="#ad4242">Protocol threshold 20ms</text>
+<path d="M88.00,262.98 L321.28,264.64 L468.46,265.45 L615.64,265.46 L762.82,249.56 L910.00,107.23" fill="none" stroke="#087e8b" stroke-width="2"/>
+<circle cx="88.0" cy="262.9804553745964" r="5" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 1 lines explore: 16.979ms, PASS</title></circle>
+<circle cx="321.276262002576" cy="264.6364702325674" r="5" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 3 lines explore: 16.771ms, PASS</title></circle>
+<circle cx="468.457196501932" cy="265.45414769780575" r="5" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 6 lines explore: 16.668ms, PASS</title></circle>
+<circle cx="615.638131001288" cy="265.45519341776935" r="5" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 12 lines explore: 16.668ms, PASS</title></circle>
+<circle cx="762.819065500644" cy="249.55982850192598" r="5" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 24 lines explore: 18.666ms, PASS</title></circle>
+<circle cx="910.0" cy="107.22519440252216" r="5" fill="#087e8b" stroke="#d02323" stroke-width="2"><title>full-cpu 48 lines explore: 36.565ms, FAIL</title></circle>
+<circle cx="762.819065500644" cy="245.07486678998828" r="3" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 24 lines confirm1: 19.230ms, PASS</title></circle>
+<circle cx="762.819065500644" cy="247.41142665758875" r="3" fill="#087e8b" stroke="white" stroke-width="2"><title>full-cpu 24 lines confirm2: 18.937ms, PASS</title></circle>
+<circle cx="910.0" cy="101.84464709999594" r="3" fill="#087e8b" stroke="#d02323" stroke-width="2"><title>full-cpu 48 lines confirm1: 37.242ms, FAIL</title></circle>
+<circle cx="910.0" cy="98.00000000000006" r="3" fill="#087e8b" stroke="#d02323" stroke-width="2"><title>full-cpu 48 lines confirm2: 37.725ms, FAIL</title></circle>
+<text x="88" y="56" font-family="sans-serif" font-size="13" fill="#087e8b">full-cpu</text>
+<path d="M88.00,263.01 L321.28,263.28 L468.46,265.45 L615.64,265.46 L762.82,246.83 L910.00,109.10" fill="none" stroke="#a23b85" stroke-width="2"/>
+<circle cx="88.0" cy="263.0060138838212" r="5" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 1 lines explore: 16.976ms, PASS</title></circle>
+<circle cx="321.276262002576" cy="263.28241794842467" r="5" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 3 lines explore: 16.941ms, PASS</title></circle>
+<circle cx="468.457196501932" cy="265.44952346846094" r="5" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 6 lines explore: 16.668ms, PASS</title></circle>
+<circle cx="615.638131001288" cy="265.4559886420763" r="5" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 12 lines explore: 16.668ms, PASS</title></circle>
+<circle cx="762.819065500644" cy="246.82665051124306" r="5" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 24 lines explore: 19.010ms, PASS</title></circle>
+<circle cx="910.0" cy="109.10059574228956" r="5" fill="#a23b85" stroke="#d02323" stroke-width="2"><title>full-gpu 48 lines explore: 36.329ms, FAIL</title></circle>
+<circle cx="762.819065500644" cy="246.10511168859122" r="3" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 24 lines confirm1: 19.101ms, PASS</title></circle>
+<circle cx="762.819065500644" cy="247.77837496177955" r="3" fill="#a23b85" stroke="white" stroke-width="2"><title>full-gpu 24 lines confirm2: 18.890ms, PASS</title></circle>
+<circle cx="910.0" cy="100.93728026130015" r="3" fill="#a23b85" stroke="#d02323" stroke-width="2"><title>full-gpu 48 lines confirm1: 37.356ms, FAIL</title></circle>
+<circle cx="910.0" cy="103.19293400791327" r="3" fill="#a23b85" stroke="#d02323" stroke-width="2"><title>full-gpu 48 lines confirm2: 37.072ms, FAIL</title></circle>
+<text x="323" y="56" font-family="sans-serif" font-size="13" fill="#a23b85">full-gpu</text>
+<path d="M88.00,262.38 L321.28,263.22 L468.46,265.46 L615.64,265.46 L762.82,265.46 L910.00,225.89" fill="none" stroke="#657181" stroke-width="2"/>
+<circle cx="88.0" cy="262.3773334034898" r="5" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 1 lines explore: 17.055ms, PASS</title></circle>
+<circle cx="321.276262002576" cy="263.2204858794008" r="5" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 3 lines explore: 16.949ms, PASS</title></circle>
+<circle cx="468.457196501932" cy="265.4551775132833" r="5" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 6 lines explore: 16.668ms, PASS</title></circle>
+<circle cx="615.638131001288" cy="265.45678386638326" r="5" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 12 lines explore: 16.667ms, PASS</title></circle>
+<circle cx="762.819065500644" cy="265.4566208454003" r="5" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 24 lines explore: 16.667ms, PASS</title></circle>
+<circle cx="910.0" cy="225.8944541189372" r="5" fill="#657181" stroke="#d02323" stroke-width="2"><title>render-cpu 48 lines explore: 21.642ms, FAIL</title></circle>
+<circle cx="762.819065500644" cy="265.4559886420763" r="3" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 24 lines confirm1: 16.668ms, PASS</title></circle>
+<circle cx="762.819065500644" cy="265.4563067317991" r="3" fill="#657181" stroke="white" stroke-width="2"><title>render-cpu 24 lines confirm2: 16.667ms, PASS</title></circle>
+<circle cx="910.0" cy="221.77172503105024" r="3" fill="#657181" stroke="#d02323" stroke-width="2"><title>render-cpu 48 lines confirm1: 22.161ms, FAIL</title></circle>
+<circle cx="910.0" cy="222.83890809871014" r="3" fill="#657181" stroke="#d02323" stroke-width="2"><title>render-cpu 48 lines confirm2: 22.027ms, FAIL</title></circle>
+<text x="558" y="56" font-family="sans-serif" font-size="13" fill="#657181">render-cpu</text>
+<text x="470.0" y="452" text-anchor="middle" font-family="sans-serif" font-size="14">Active independent lines (log2 positions); small dots = confirmations</text>
+<text x="18" y="235.0" transform="rotate(-90 18 235.0)" text-anchor="middle" font-family="sans-serif" font-size="14">Frame interval p95 (ms)</text>
+</svg>

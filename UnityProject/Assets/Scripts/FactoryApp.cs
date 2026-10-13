@@ -30,6 +30,7 @@ namespace Braemac.Factory {
   public string DataPath{get{return dataPath;}}
   public static string Argument(string key,string fallback=""){var a=Environment.GetCommandLineArgs();for(int i=0;i<a.Length-1;i++)if(a[i]==key)return a[i+1];return fallback;}
   void Awake(){
+   if(Argument("--stage4","false")=="true"){gameObject.AddComponent<MultiLineFactory>();enabled=false;return;}
    measurement=Argument("--measurement","false")=="true";if(Argument("--inspection-dataset")!="")paused=true;
    Application.runInBackground=true;Application.targetFrameRate=int.Parse(Argument("--frame-target","60"));QualitySettings.vSyncCount=0;
    QualitySettings.antiAliasing=4;QualitySettings.shadows=ShadowQuality.All;QualitySettings.shadowDistance=55;
@@ -201,6 +202,7 @@ namespace Braemac.Factory {
    GUILayout.Label("Old Gemma inspector retained only in original baseline; not run by this launch.",small);
   }
   void OnApplicationQuit(){
+   if(!enabled||Sim==null)return;
    string stamp=DateTime.UtcNow.ToString("yyyyMMddTHHmmssZ");
    File.WriteAllLines(Path.Combine(dataPath,"frames-"+stamp+".csv"),FrameLines());
    File.WriteAllLines(Path.Combine(dataPath,"telemetry-"+stamp+".csv"),TickLines());

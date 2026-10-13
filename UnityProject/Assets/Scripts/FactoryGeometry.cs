@@ -108,11 +108,11 @@ namespace Braemac.Factory {
    var cap=Shape("Cap",PrimitiveType.Cylinder,new Vector3(0,.76f,0),new Vector3(.18f,.04f,.18f),cyan,o.transform);
    return new BottleVisual{Root=o,Cap=cap,Fluid=fluid};
   }
-  public void Update(LineSimulation sim,float alpha,Camera camera,PlcMapping telemetry=null,double wall=0){
+  public void Update(LineSimulation sim,float alpha,Camera camera,PlcMapping telemetry=null,double wall=0,string lineId="Line01"){
    var alive=new HashSet<int>();
    foreach(var b in sim.Bottles){alive.Add(b.Id);if(!Products.ContainsKey(b.Id))Products[b.Id]=CreateBottle(b.Id);
     var v=Products[b.Id];float x=Mathf.Lerp(b.PreviousX,b.X,alpha);float z=b.Rejected?Mathf.Min(2.3f,b.RejectTravel):0;
-    v.Root.transform.position=new Vector3(x,1.01f,z);v.Cap.SetActive(b.Stage>=4&&b.CapPresent);
+    v.Root.transform.position=root.transform.position+new Vector3(x,1.01f,z);v.Cap.SetActive(b.Stage>=4&&b.CapPresent);
     v.Cap.transform.localPosition=new Vector3(b.CapDisplaced?.075f:0,.76f,0);v.Cap.transform.localRotation=Quaternion.Euler(0,0,b.CapDisplaced?18:0);
     v.Fluid.SetActive(b.Stage>=2);v.Fluid.transform.localPosition=new Vector3(0,.51f*(b.Fill/500f),0);
    }
@@ -123,9 +123,9 @@ namespace Braemac.Factory {
     Moving["packer"].localPosition=new Vector3(10,1.75f,Mathf.Sin(Mathf.PI*Mathf.Clamp01((float)(sim.Time-sim.LastPackedTime)/.45f))*.4f);
    }else{
     float v;
-    for(int h=0;h<4;h++)if(telemetry.Number("Line01.Filler.Head"+(h+1)+".PositionY",wall,out v))Moving["head"+h].localPosition=new Vector3(-8.1f+h*.7f,v,0);
-    if(telemetry.Number("Line01.Capper.Angle",wall,out v))Moving["capper"].localRotation=Quaternion.Euler(0,v,0);
-    if(telemetry.Number("Line01.Packer.PusherZ",wall,out v))Moving["packer"].localPosition=new Vector3(10,1.75f,v);
+    for(int h=0;h<4;h++)if(telemetry.Number(lineId+".Filler.Head"+(h+1)+".PositionY",wall,out v))Moving["head"+h].localPosition=new Vector3(-8.1f+h*.7f,v,0);
+    if(telemetry.Number(lineId+".Capper.Angle",wall,out v))Moving["capper"].localRotation=Quaternion.Euler(0,v,0);
+    if(telemetry.Number(lineId+".Packer.PusherZ",wall,out v))Moving["packer"].localPosition=new Vector3(10,1.75f,v);
    }
    foreach(var text in labels){text.transform.rotation=Quaternion.LookRotation(text.transform.position-camera.transform.position);}
   }

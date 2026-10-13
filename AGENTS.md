@@ -1,11 +1,7 @@
-# Factory Galaxy — milestone-one scope
+# Factory Galaxy project guidance
 
-Read README.md, ENVIRONMENT.md, STATUS.md, HANDOVER.md, TEST_REPORT.md and PERFORMANCE.md before continuation. This is the single existing manufacturing project. The consolidated Pietro brief prioritises the actual Unity visual slice, then telemetry/faults, bounded analytics / scene-pixel vision / local assistance, measurements and a portable milestone-one package.
+Read stage4/README.md, PROTOCOL.md, PERFORMANCE.md, VERIFICATION.md, MILESTONE-4.md and HANDOVER.md before continuation. Stage4 is complete for review; do not automatically start another milestone or benchmark cycle. Preserve earlier source, builds, models, datasets, exact replies, failures, ledgers and accepted launch paths.
 
-Preserve the original reports, earlier visual-slice commits, exact model replies and failed checks. Keep tender/support/Fleet/WebUI/Ollama and remote access unchanged. No physical PLC writes, AI machine commands, automatic repairs, new lines/models or open-ended training. Inputs and procedures are synthetic / unapproved. Injected labels stay out of inference; source quality and timestamps remain explicit. Model output is advisory, not an established physical diagnosis.
+This public repository is a reviewed source-only projection. Never push private/full local history, credentials, environment settings, runtime records, weights, datasets, builds or Unity caches. Use stacked PRs; no merging, force pushing or visibility changes without explicit instruction.
 
-Use pinned Unity6000.6.5f1 and existing installed local models. Never accept licence terms or select licence eligibility for Pietro. No global graphics changes/reboot. Release player only: development builds expose Unity's profiler port. Keep service bound to loopback; do not stop unrelated listeners. Existing Python dependencies only. Stop this prototype before rebuilding.
-
-Milestone stopping point: runnable, measured standalone and package; visual acceptance pending until Pietro tries it. Future integrations/benchmark comparisons need a new instruction. Record unsupported claims, model errors, unverified hardware portability and source limitations. Do not label reference membership as factual validation or CPU/GPU shared memory as disjoint allocations.
-
-Stage3: sole presentation1920×1080; preserve prior launchers/results and bounded ledgers. See stage3/MILESTONE-3.md. No locked retests, further training, streaming changes, multiple lines or driver changes. Dataset/model/build/private history excluded from public review; reproduce locally as documented.
+Simulated PLC data and rendered images only. No physical commands, automatic repairs, hidden truth in inference or industrial accuracy claims. Keep CPU/GPU weights/preprocessing/policy identical for hardware comparisons. Existing budgets remain preserved; no training/locked-test reuse/Qwen calls in Stage4. Unavailable/stale evidence is explicit. Do not change unrelated services, graphics drivers, remote access or streaming.
