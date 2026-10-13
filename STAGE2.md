@@ -31,3 +31,6 @@ Local full history stays separate from reviewed public history. Stage2 branch st
 No real PLC, OPC UA/MQTT, AI analysis, camera inspection/inference, additional line/camera, streaming work or new operating procedure. Frozen old cyan-cap configuration remains distinct from unvalidated brewery pixels. Simulated unit/state definitions are not physical commissioning evidence. A future real adapter needs independent transport, timing, units, tracking and safety review. Stale contract-driven mechanisms hold while simulator-driven bottles can keep moving, intentionally labelled. The UI displays the latest three timeline events from a bounded32-event session list. No production reliability, cross-hardware performance or independent inspection accuracy claim.
 
 Stage2 implementation complete, operator acceptance pending. Stop at this milestone; no automatic next stage.
+
+
+Stage2 GitHub closure: PR2 https://github.com/spietros82/gts_factory_galaxy/pull/2 open/unmerged, stacked on Stage1. Reviewed public code9326825, local native d516dd3;163paths verified before documentation-only closure, zero byte/path mismatches. Normal review unit active at1600x900/Combined/Lager/healthy1x, QA flags removed. Prior build/inspection counters preserved. Operator acceptance pending; work stopped at Stage2. See telemetry/GITHUB-DELIVERY.md.
