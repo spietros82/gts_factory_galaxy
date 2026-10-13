@@ -41,7 +41,7 @@ def validate_explanation(response,record):
  v=validate_response('assistant',response,[record['frame_id']],['S3-DEMO-1'])
  if v['evidence_ids']!=[record['frame_id']] or v['procedure_ids']!=['S3-DEMO-1']:raise ValueError('Required exact references missing')
  joined=' '.join(v[k] for k in ['explanation','next_check','uncertainty'])
- if len(joined)>900 or re.search(r"\b\d+(?:\.\d+)?\s*m[lL]\b|\bmL\b",joined) or re.search(r'\b(torque|seal|leak.tight|securely|secure attachment|millilit|root cause|hours|days)\b',joined,re.I):raise ValueError('Unsupported scope or length')
+ if len(joined)>900 or re.search(r"\b\d+(?:\.\d+)?\s*m[lL]\b|\bmL\b",joined) or re.search(r'\b(torque|seal\w*|leak.tight|secure\w*|attach\w*|millilit\w*|readab\w*|volume|root cause|hours|days)\b',joined,re.I):raise ValueError('Unsupported scope or length')
  return v
 class Engine:
  def __init__(self,cfg,adapter=None):

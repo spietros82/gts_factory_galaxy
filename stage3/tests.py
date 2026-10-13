@@ -50,6 +50,10 @@ class SafetyTests(unittest.TestCase):
    cfg=dict(data_path=d,device='cpu',queue_capacity=2,ollama_endpoint='http://127.0.0.1:11434',assistant_timeout_seconds=1,monitoring=False)
    with patch('threading.Thread.start'):engine=Engine(cfg)
    self.assertEqual(len(engine.records),200);self.assertTrue(any(r['frame_id']=='0' for r in engine.view()['events']))
+ def test_language_cannot_claim_readability_attachment_or_volume(self):
+  for forbidden in ['Label is readable','Cap firmly attached','Volume is 250 millilitres']:
+   v=dict(explanation=forbidden,next_check='Review crop',uncertainty='Experimental',evidence_ids=['evidence'],procedure_ids=['S3-DEMO-1']);reply=ModelResponse({'done':True,'done_reason':'stop','message':{'content':json.dumps(v)}},0,'fake')
+   with self.assertRaises(ValueError):validate_explanation(reply,{'frame_id':'evidence'})
  def test_backend_failure_honest(self):
   with self.assertRaises(ValueError):validate_explanation(FakeAdapter(error='offline').execute(None),{'frame_id':'evidence'})
 if __name__=='__main__':unittest.main()

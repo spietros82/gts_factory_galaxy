@@ -1,3 +1,9 @@
+# Stage3 final guard and delivery
+
+- Extended language-only negative tests to physical-volume spellings, attachment and label readability;14offline checks, no additional live model call. Vision/render measurements and frozen dataset/model unchanged.
+- PR#3 opened as reviewed source-only stacked branch; initial63published entries byte-verified, public ancestry Stage2 preserved, no merge/visibility change.
+- Normal healthy/CPU1080launcher left running; QA flags removed. Package excludes datasets/weights/builds/runtime/private history; original source checkpoint retained. Acceptance pending.
+
 # Stage3 — 2026-10-13
 
 Three actual brewery image views, same-weight CPU/AMD-GPU MLP48, bounded queue/evidence, provisional readable interface, explicit local Qwen review. Frozen synthetic group evaluation once/device; original failures and guarded reply retained. Matched final1080performance and native QA, prior2423hashes preserved. Reviewed source projects onto public Stage2 ancestry, no merge or private-history push. Detailed stage3/MILESTONE-3.md.
