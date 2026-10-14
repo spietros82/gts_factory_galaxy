@@ -14,6 +14,7 @@ public static class BuildFactory {
   new GameObject("Factory application").AddComponent<FactoryApp>();
   Directory.CreateDirectory("Assets/Scenes");Directory.CreateDirectory("Assets/Resources");
   if(!File.Exists("Assets/Resources/FactoryStandard.mat"))AssetDatabase.CreateAsset(new Material(Shader.Find("Standard")),"Assets/Resources/FactoryStandard.mat");
+  var stage5Mask=AssetDatabase.LoadAssetAtPath<Material>("Assets/Resources/Stage5IdMask.mat");if(stage5Mask==null){var shader=AssetDatabase.LoadAssetAtPath<Shader>("Assets/Shaders/Stage5IdMask.shader");if(shader==null)throw new Exception("Stage5 evaluator mask shader is missing");AssetDatabase.CreateAsset(new Material(shader),"Assets/Resources/Stage5IdMask.mat");}
   EditorSceneManager.SaveScene(scene,"Assets/Scenes/Factory.unity");AssetDatabase.SaveAssets();
   PlayerSettings.companyName="Braemac";PlayerSettings.productName="GTS Factory Galaxy";
   PlayerSettings.defaultScreenWidth=1600;PlayerSettings.defaultScreenHeight=900;PlayerSettings.fullScreenMode=FullScreenMode.Windowed;
